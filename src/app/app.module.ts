@@ -15,7 +15,6 @@ import { UserService } from './services/user-service/user.service';
     CommonModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-
     RouterModule.forRoot(routes),
   ],
   providers: [provideHttpClient(), UserService],

@@ -1,11 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserType } from '../../models/user';
 import { UserService } from '../../services/user-service/user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-user',
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.css'],
 })
