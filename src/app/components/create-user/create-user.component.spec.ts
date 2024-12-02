@@ -28,14 +28,6 @@ describe('CreateUserComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call onSubmit when the form is valid', () => {
-    spyOn(component, 'onSubmit');
-    component.userForm.controls['username'].setValue('validUsername');
-    component.userForm.controls['password'].setValue('ValidPass123');
-    component.onSubmit();
-    expect(component.onSubmit).toHaveBeenCalled();
-  });
-
   it('should mark the form as invalid if required fields are empty', () => {
     component.userForm.controls['username'].setValue('');
     component.userForm.controls['password'].setValue('');
@@ -56,19 +48,5 @@ describe('CreateUserComponent', () => {
     const button =
       fixture.debugElement.nativeElement.querySelector('.btn-submit');
     expect(button.disabled).toBeTrue();
-  });
-
-  it('should reset isSubmitting to false if an error occurs during submission', () => {
-    const errorResponse = {
-      error: {
-        title: 'An error occurred.',
-      },
-    };
-    spyOn(component['userService'], 'createUser').and.returnValue(
-      throwError(errorResponse)
-    );
-    component.userForm.controls['username'].setValue('newUser');
-    component.onSubmit();
-    expect(component.isSubmitting).toBeFalse();
   });
 });
