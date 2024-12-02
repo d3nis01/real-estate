@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { DetailUserComponent } from './details-user.component';
 
 describe('DetailUserComponent', () => {
@@ -8,9 +9,12 @@ describe('DetailUserComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DetailUserComponent]
-    })
-    .compileComponents();
+      imports: [
+        DetailUserComponent,
+        HttpClientTestingModule, // Mock HttpClient
+        RouterTestingModule, // Mock ActivatedRoute and Router
+      ],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(DetailUserComponent);
     component = fixture.componentInstance;

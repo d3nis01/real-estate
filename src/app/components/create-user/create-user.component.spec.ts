@@ -12,9 +12,8 @@ describe('CreateUserComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        HttpClientTestingModule,
-        RouterTestingModule,
         ReactiveFormsModule,
+        HttpClientTestingModule,
         CreateUserComponent,
       ],
       providers: [UserService],

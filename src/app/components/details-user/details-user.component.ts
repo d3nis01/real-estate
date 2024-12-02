@@ -3,11 +3,12 @@ import { OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IUser } from '../../models/user';
 import { UserService } from '../../services/user-service/user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-details-user',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './details-user.component.html',
   styleUrl: './details-user.component.css',
 })
