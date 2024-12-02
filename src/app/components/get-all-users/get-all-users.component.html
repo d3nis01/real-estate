@@ -7,26 +7,56 @@
 </div>
 
 <div class="user-list">
-  <div *ngFor="let user of users" class="user-item">
-    <p class="user-field">Username: {{ user.username }}</p>
-    <p class="user-field">First Name: {{ user.firstName }}</p>
-    <p class="user-field">Last Name: {{ user.lastName }}</p>
-    <p class="user-field">Email: {{ user.email }}</p>
-    <p class="user-field">Phone Number: {{ user.phoneNumber }}</p>
-    <p class="user-field">City: {{ user.city }}</p>
-    <p class="user-field">Country: {{ user.country }}</p>
-    <p class="user-field">User Type: {{ user.userType }}</p>
-    <button (click)="editUser(user.id)">Edit User</button>
-    <button (click)="deleteUser(user.id)">Delete User</button>
-  </div>
-</div>
+  <div class="user-cards">
+    <div *ngFor="let user of users" class="user-item">
+      <div class="fields-wrapper">
+        <p class="user-field" data-label="Username:">
+          <span>{{ user.username }}</span>
+        </p>
+        <p class="user-field" data-label="First Name:">
+          <span>{{ user.firstName }}</span>
+        </p>
+        <p class="user-field" data-label="Last Name:">
+          <span>{{ user.lastName }}</span>
+        </p>
+        <p class="user-field" data-label="Email:">
+          <span>{{ user.email }}</span>
+        </p>
+        <p class="user-field" data-label="Phone Number:">
+          <span>{{ user.phoneNumber }}</span>
+        </p>
+        <p class="user-field" data-label="City:">
+          <span>{{ user.city }}</span>
+        </p>
+        <p class="user-field" data-label="Country:">
+          <span>{{ user.country }}</span>
+        </p>
+        <p class="user-field" data-label="User Type:">
+          <span>{{ user.userType }}</span>
+        </p>
+      </div>
 
-<div class="pagination">
-  <button (click)="previousPage()" [disabled]="pageNumber === 1">
-    Previous
-  </button>
-  <span>Page {{ pageNumber }}</span>
-  <button (click)="nextPage()" [disabled]="pageNumber * pageSize >= totalCount">
-    Next
-  </button>
+      <div class="buttons-wrapper">
+        <button (click)="editUser(user.id)">Edit User</button>
+        <button (click)="deleteUser(user.id)">Delete User</button>
+      </div>
+    </div>
+  </div>
+  <div class="pagination">
+    <button
+      class="pagination-button"
+      (click)="previousPage()"
+      [disabled]="pageNumber === 1"
+    >
+      Previous
+    </button>
+    <span>Page {{ pageNumber }}</span>
+    <button
+      class="pagination-button"
+      (click)="nextPage()"
+      [disabled]="pageNumber * pageSize >= totalCount"
+    >
+      Next
+    </button>
+  </div>
 </div>

@@ -61,23 +61,34 @@ export class CreateUserComponent implements OnInit {
       this.isSubmitting = true;
       this.errorMessage = null;
 
-      // Call the createUser API
       this.userService.createUser(this.userForm.value).subscribe({
         next: () => {
-          // Navigate to the user list page on success
-          this.router.navigate(['/get-all-users']);
-        },
-        error: (error) => {
-          console.error('Error creating user:', error);
-          this.errorMessage = 'Failed to create user. Please try again.';
-        },
-        complete: () => {
           this.isSubmitting = false;
+          this.router.navigate(['/get-all-users']); // Navigate to the list of users
+        },
+        error: (errorResponse) => {
+          this.isSubmitting = false;
+          if (errorResponse.error && errorResponse.error.validationErrors) {
+            // Handle validation errors and display them in the form
+            errorResponse.error.validationErrors.forEach((error: string) => {
+              if (error.includes('Username')) {
+                this.userForm.get('username')?.setErrors({ unique: true });
+              }
+              // Add other field-specific error handling here if needed
+            });
+          } else {
+            // General error handling
+            this.errorMessage =
+              errorResponse.error?.title || 'An error occurred.';
+          }
         },
       });
     } else {
-      this.errorMessage =
-        'Please fix the errors in the form before submitting.';
+      this.errorMessage = 'Please fix the errors in the form.';
     }
+  }
+
+  goToAllUsers(): void {
+    this.router.navigate(['/get-all-users']);
   }
 }

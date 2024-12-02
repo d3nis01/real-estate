@@ -93,4 +93,8 @@ export class UpdateUserComponent implements OnInit {
         'Please fix the errors in the form before submitting.';
     }
   }
+
+  goToAllUsers(): void {
+    this.router.navigate(['/get-all-users']);
+  }
 }
