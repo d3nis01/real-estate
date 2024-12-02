@@ -3,11 +3,6 @@
     <li>
       <a (click)="goToCreateUser()" routerLink="/create-user">Create User</a>
     </li>
-    <li>
-      <a (click)="goToGetAllUsers()" routerLink="/get-all-users"
-        >View All Users</a
-      >
-    </li>
   </ul>
 </div>
 
@@ -21,9 +16,17 @@
     <p class="user-field">City: {{ user.city }}</p>
     <p class="user-field">Country: {{ user.country }}</p>
     <p class="user-field">User Type: {{ user.userType }}</p>
-    <button (click)="editUser(user.id)" class="btn-edit">Edit User</button>
-    <button (click)="deleteUser(user.id)" class="btn-delete">
-      Delete User
-    </button>
+    <button (click)="editUser(user.id)">Edit User</button>
+    <button (click)="deleteUser(user.id)">Delete User</button>
   </div>
+</div>
+
+<div class="pagination">
+  <button (click)="previousPage()" [disabled]="pageNumber === 1">
+    Previous
+  </button>
+  <span>Page {{ pageNumber }}</span>
+  <button (click)="nextPage()" [disabled]="pageNumber * pageSize >= totalCount">
+    Next
+  </button>
 </div>

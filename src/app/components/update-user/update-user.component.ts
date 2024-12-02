@@ -8,10 +8,11 @@ import {
 } from '@angular/forms';
 import { UserService } from '../../services/user-service/user.service';
 import { IUser, UserType } from '../../models/user';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-update-user',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   standalone: true,
   templateUrl: './update-user.component.html',
   styleUrls: ['./update-user.component.css'],

@@ -13,27 +13,28 @@ export class UserService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  // Get all users - returns an observable of IUser[]
-  getAllUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${this.baseUrl}`);
+  // Get users with pagination
+  getAllUsers(
+    pageNumber: number,
+    pageSize: number
+  ): Observable<{ items: IUser[]; totalCount: number }> {
+    return this.http.get<{ items: IUser[]; totalCount: number }>(
+      `${this.baseUrl}?pageNumber=${pageNumber}&pageSize=${pageSize}`
+    );
   }
 
-  // Get a user by ID - returns an observable of IUser
   getUserById(id: string): Observable<IUser> {
     return this.http.get<IUser>(`${this.baseUrl}/${id}`);
   }
 
-  // Create a new user - returns an observable of the created IUser
   createUser(user: IUser): Observable<IUser> {
     return this.http.post<IUser>(`${this.baseUrl}`, user);
   }
 
-  // Update a user - returns an observable of the updated IUser
   updateUser(id: string, user: IUser): Observable<IUser> {
     return this.http.put<IUser>(`${this.baseUrl}/${id}`, user);
   }
 
-  // Delete a user - returns an observable of void (no content returned)
   deleteUser(id: string): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }

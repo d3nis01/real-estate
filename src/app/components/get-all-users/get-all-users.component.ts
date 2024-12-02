@@ -13,13 +13,37 @@ import { CommonModule } from '@angular/common';
 })
 export class GetAllUsersComponent implements OnInit {
   users: IUser[] = [];
+  totalCount = 0;
+  pageSize = 10; // Default page size
+  pageNumber = 1; // Current page
 
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
-    this.userService.getAllUsers().subscribe((users) => {
-      this.users = users;
-    });
+    this.loadUsers();
+  }
+
+  loadUsers(): void {
+    this.userService
+      .getAllUsers(this.pageNumber, this.pageSize)
+      .subscribe((response) => {
+        this.users = response.items;
+        this.totalCount = response.totalCount;
+      });
+  }
+
+  nextPage(): void {
+    if (this.pageNumber * this.pageSize < this.totalCount) {
+      this.pageNumber++;
+      this.loadUsers();
+    }
+  }
+
+  previousPage(): void {
+    if (this.pageNumber > 1) {
+      this.pageNumber--;
+      this.loadUsers();
+    }
   }
 
   editUser(userId: string): void {
@@ -30,17 +54,12 @@ export class GetAllUsersComponent implements OnInit {
     this.userService.deleteUser(userId).subscribe({
       next: () => {
         this.users = this.users.filter((user) => user.id !== userId);
+        this.loadUsers();
       },
     });
   }
 
   goToCreateUser(): void {
     this.router.navigate(['/create-user']);
-  }
-  goToUpdateUser(userId: string): void {
-    this.router.navigate(['/update-user', userId]);
-  }
-  goToGetAllUsers(): void {
-    this.router.navigate(['/get-all-users']);
   }
 }
