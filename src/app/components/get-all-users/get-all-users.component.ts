@@ -46,20 +46,11 @@ export class GetAllUsersComponent implements OnInit {
     }
   }
 
-  editUser(userId: string): void {
-    this.router.navigate(['/update-user', userId]);
-  }
-
-  deleteUser(userId: string): void {
-    this.userService.deleteUser(userId).subscribe({
-      next: () => {
-        this.users = this.users.filter((user) => user.id !== userId);
-        this.loadUsers();
-      },
-    });
-  }
-
   goToCreateUser(): void {
     this.router.navigate(['/create-user']);
+  }
+
+  goToDetailsUser(userId: string): void {
+    this.router.navigate(['/details-user', userId]);
   }
 }

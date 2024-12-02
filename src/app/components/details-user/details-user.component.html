@@ -1,0 +1,34 @@
+<!-- user-details.component.html -->
+<div class="user-details">
+  <div class="fields-wrapper">
+    <p class="user-field" data-label="Username:">
+      <span>{{ user.username }}</span>
+    </p>
+    <p class="user-field" data-label="First Name:">
+      <span>{{ user.firstName }}</span>
+    </p>
+    <p class="user-field" data-label="Last Name:">
+      <span>{{ user.lastName }}</span>
+    </p>
+    <p class="user-field" data-label="Email:">
+      <span>{{ user.email }}</span>
+    </p>
+    <p class="user-field" data-label="Phone Number:">
+      <span>{{ user.phoneNumber }}</span>
+    </p>
+    <p class="user-field" data-label="City:">
+      <span>{{ user.city }}</span>
+    </p>
+    <p class="user-field" data-label="Country:">
+      <span>{{ user.country }}</span>
+    </p>
+    <p class="user-field" data-label="User Type:">
+      <span>{{ user.userType }}</span>
+    </p>
+  </div>
+
+  <div class="buttons-wrapper">
+    <button (click)="editUser(user.id)">Edit User</button>
+    <button (click)="deleteUser(user.id)">Delete User</button>
+  </div>
+</div>

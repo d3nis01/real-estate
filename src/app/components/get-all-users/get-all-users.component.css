@@ -31,153 +31,109 @@
   background-color: #339fff;
 }
 
-/* User list styling */
-.user-list {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  gap: 1.5rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.user-item {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-  width: calc(33% - 2rem);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.user-field {
-  font-size: 1rem;
-}
-
-span {
-  padding-left: 4px;
-}
-
-.btn-edit {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-edit:hover {
-  background-color: #0056b3;
-}
-
-.btn-delete {
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.btn-delete:hover {
-  background-color: #c82333;
-}
-
-.user-list {
-  display: flex;
-  /* flex-direction: column; */
-  flex-wrap: wrap;
-  /* align-items: center; */
-  justify-content: space-between;
-  gap: 20px;
-  padding: 20px;
-  max-width: 1200px;
+/* User Table Styling */
+.user-table {
   margin: 0 auto;
+  padding: 1rem 0;
+  max-width: 1200px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   background-color: #f9f9f9;
-  margin-bottom: 10px;
-
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
-.user-item {
-  padding: 15px;
-  border: 1px solid #dcdcdc;
-  border-radius: 8px;
-  background-color: #fff;
-  width: 250px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
 }
 
-.user-field {
-  font-size: 14px;
+thead {
+  background-color: #007bff;
+  width: 100%;
+  color: white;
 }
 
-.user-field::before {
-  content: attr(data-label);
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  font-size: 16px;
   font-weight: bold;
-  color: black;
-  display: inline-block;
 }
 
-.user-field span {
+td {
+  font-size: 14px;
   color: #555;
-  font-weight: normal;
 }
 
-button {
+tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* Details Button Styling */
+.details-button {
   padding: 8px 12px;
   font-size: 14px;
-  width: 100%;
-  max-width: 200px;
   color: #fff;
   background-color: #007bff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  text-align: center;
 }
 
-button:hover {
+.details-button:hover {
   background-color: #0056b3;
 }
 
-button:nth-child(2) {
-  background-color: #dc3545;
+/* Disabled state for Details Button */
+.details-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
 }
 
-button:nth-child(2):hover {
-  background-color: #a71d2a;
-}
-
-.buttons-wrapper {
+.actions {
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 100%;
   gap: 10px;
-  flex-direction: column;
-  height: 100%;
-}
-
-.fields-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 5px 10px;
-}
-
-.user-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
   justify-content: center;
 }
 
+.actions button {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.actions button:nth-child(1) {
+  background-color: #007bff;
+}
+
+.actions button:nth-child(1):hover {
+  background-color: #0056b3;
+}
+
+.actions button:nth-child(2) {
+  background-color: #dc3545;
+}
+
+.actions button:nth-child(2):hover {
+  background-color: #a71d2a;
+}
+
+/* Pagination Styling */
 .pagination {
   display: flex;
   justify-content: center;

@@ -1,0 +1,91 @@
+/* User Details Styling */
+.user-details {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.fields-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.user-field {
+  font-size: 16px;
+  margin: 0;
+}
+
+.user-field::before {
+  content: attr(data-label);
+  font-weight: bold;
+  color: #333;
+  margin-right: 5px;
+}
+
+.user-field span {
+  color: #555;
+  font-weight: normal;
+}
+
+/* Buttons Wrapper */
+.buttons-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Edit Button */
+.buttons-wrapper button:first-child {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.buttons-wrapper button:first-child:hover {
+  background-color: #0056b3;
+}
+
+/* Delete Button */
+.buttons-wrapper button:last-child {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.buttons-wrapper button:last-child:hover {
+  background-color: #a71d2a;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .fields-wrapper {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .buttons-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .buttons-wrapper button {
+    width: 100%;
+  }
+}
