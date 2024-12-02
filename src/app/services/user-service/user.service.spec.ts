@@ -24,6 +24,11 @@ describe('UserService', () => {
     userType: UserType.Buyer,
   };
 
+  const mockPaginatedResponse = {
+    items: [mockUser],
+    totalCount: 1,
+  };
+
   const baseUrl = environment.apiUrl;
 
   beforeEach(() => {
@@ -43,16 +48,21 @@ describe('UserService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should fetch all users', () => {
-    const mockUsers: IUser[] = [mockUser];
+  it('should fetch paginated users', () => {
+    const pageNumber = 1;
+    const pageSize = 10;
 
-    service.getAllUsers().subscribe((users) => {
-      expect(users).toEqual(mockUsers);
+    service.getAllUsers(pageNumber, pageSize).subscribe((response) => {
+      expect(response).toEqual(mockPaginatedResponse);
+      expect(response.items.length).toBe(1);
+      expect(response.totalCount).toBe(1);
     });
 
-    const req = httpMock.expectOne(`${baseUrl}/Users`);
+    const req = httpMock.expectOne(
+      `${baseUrl}/Users?pageNumber=${pageNumber}&pageSize=${pageSize}`
+    );
     expect(req.request.method).toBe('GET');
-    req.flush(mockUsers);
+    req.flush(mockPaginatedResponse);
   });
 
   it('should fetch a user by ID', () => {
