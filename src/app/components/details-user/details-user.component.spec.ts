@@ -11,8 +11,8 @@ describe('DetailUserComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         DetailUserComponent,
-        HttpClientTestingModule, // Mock HttpClient
-        RouterTestingModule, // Mock ActivatedRoute and Router
+        HttpClientTestingModule,
+        RouterTestingModule,
       ],
     }).compileComponents();
 
@@ -23,5 +23,18 @@ describe('DetailUserComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should navigate to all users page on goToAllUsers', () => {
+    const routerSpy = spyOn(component['router'], 'navigate');
+    component.goToAllUsers();
+    expect(routerSpy).toHaveBeenCalledWith(['/get-all-users']);
+  });
+
+  it('should navigate to update user page on editUser', () => {
+    const routerSpy = spyOn(component['router'], 'navigate');
+    const userId = '123';
+    component.editUser(userId);
+    expect(routerSpy).toHaveBeenCalledWith(['/update-user', userId]);
   });
 });
