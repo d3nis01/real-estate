@@ -4,9 +4,8 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
 import { UpdateUserComponent } from './components/update-user/update-user.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'get-all-users', pathMatch: 'full' },
+  { path: '', redirectTo: '/get-all-users', pathMatch: 'full' },
   { path: 'get-all-users', component: GetAllUsersComponent },
   { path: 'create-user', component: CreateUserComponent },
-  { path: 'update-user', component: UpdateUserComponent },
-  { path: '**', redirectTo: 'get-all-users' },
+  { path: 'update-user/:id', component: UpdateUserComponent },
 ];

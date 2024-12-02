@@ -1,12 +1,29 @@
+<div class="nav-bar">
+  <ul>
+    <li>
+      <a (click)="goToCreateUser()" routerLink="/create-user">Create User</a>
+    </li>
+    <li>
+      <a (click)="goToGetAllUsers()" routerLink="/get-all-users"
+        >View All Users</a
+      >
+    </li>
+  </ul>
+</div>
+
 <div class="user-list">
-    <div *ngFor="let user of users" class="user-item">
-        <p class="user-field ">Username: {{ user.username }}</p>
-        <p class="user-field ">First Name: {{ user.firstName }}</p>
-        <p class="user-field ">Last Name: {{ user.lastName }}</p>
-        <p class="user-field ">Email: {{ user.email }}</p>
-        <p class="user-field ">Phone Number: {{ user.phoneNumber }}</p>
-        <p class="user-field ">City: {{ user.city }}</p>
-        <p class="user-field ">Country: {{ user.country }}</p>
-        <p class="user-field ">User Type: {{ user.userType }}</p>
-    </div>
+  <div *ngFor="let user of users" class="user-item">
+    <p class="user-field">Username: {{ user.username }}</p>
+    <p class="user-field">First Name: {{ user.firstName }}</p>
+    <p class="user-field">Last Name: {{ user.lastName }}</p>
+    <p class="user-field">Email: {{ user.email }}</p>
+    <p class="user-field">Phone Number: {{ user.phoneNumber }}</p>
+    <p class="user-field">City: {{ user.city }}</p>
+    <p class="user-field">Country: {{ user.country }}</p>
+    <p class="user-field">User Type: {{ user.userType }}</p>
+    <button (click)="editUser(user.id)" class="btn-edit">Edit User</button>
+    <button (click)="deleteUser(user.id)" class="btn-delete">
+      Delete User
+    </button>
+  </div>
 </div>
