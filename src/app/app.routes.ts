@@ -5,6 +5,8 @@ import { UpdateUserComponent } from './components/user-components/update-user/up
 import { DetailUserComponent } from './components/user-components/details-user/details-user.component';
 import { CreateListingComponent } from './components/listing-components/create-listing/create-listing.component';
 import { GetAllListingsComponent } from './components/listing-components/get-all-listings/get-all-listings.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/get-all-users', pathMatch: 'full' },
@@ -14,4 +16,6 @@ export const routes: Routes = [
   { path: 'details-user/:id', component: DetailUserComponent },
   { path: 'create-listing', component: CreateListingComponent },
   { path: 'get-all-listings', component: GetAllListingsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 ];
