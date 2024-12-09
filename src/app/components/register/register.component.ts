@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth-service/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -18,11 +19,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  isSubmitting = false;
+  successMessage: string | null = null;
+  errorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.registerForm = this.fb.group(
       {
-        username: ['', [Validators.required, Validators.minLength(3)]],
+        email: ['', [Validators.required, Validators.email]], // Changed to 'email'
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required]],
       },
@@ -30,17 +34,36 @@ export class RegisterComponent {
     );
   }
 
+  // Custom validator for password confirmation
   passwordsMatchValidator(group: AbstractControl): ValidationErrors | null {
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
+  // Handle form submission
   onSubmit(): void {
     if (this.registerForm.valid) {
-      console.log('Registration successful', this.registerForm.value);
+      this.isSubmitting = true;
+      this.successMessage = null;
+      this.errorMessage = null;
+
+      const { email, password } = this.registerForm.value;
+
+      this.authService.register({ email, password }).subscribe({
+        next: (response) => {
+          this.isSubmitting = false;
+          this.successMessage = response.message;
+        },
+        error: (err) => {
+          this.isSubmitting = false;
+          this.errorMessage =
+            err.error?.message || 'Registration failed. Please try again.';
+        },
+      });
     } else {
-      console.log('Form is invalid');
+      this.errorMessage =
+        'Please fix the errors in the form before submitting.';
     }
   }
 }
