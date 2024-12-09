@@ -55,7 +55,6 @@ export class CreateUserComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // Handle form submission
   onSubmit(): void {
     if (this.userForm.valid) {
       this.isSubmitting = true;
@@ -69,15 +68,12 @@ export class CreateUserComponent implements OnInit {
         error: (errorResponse) => {
           this.isSubmitting = false;
           if (errorResponse.error && errorResponse.error.validationErrors) {
-            // Handle validation errors and display them in the form
             errorResponse.error.validationErrors.forEach((error: string) => {
               if (error.includes('Username')) {
                 this.userForm.get('username')?.setErrors({ unique: true });
               }
-              // Add other field-specific error handling here if needed
             });
           } else {
-            // General error handling
             this.errorMessage =
               errorResponse.error?.title || 'An error occurred.';
           }
