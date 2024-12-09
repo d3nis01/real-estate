@@ -4,7 +4,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UpdateUserComponent } from './update-user.component';
-import { UserService } from '../../services/user-service/user.service';
+import { UserService } from '../../../services/user-service/user.service';
 
 describe('UpdateUserComponent', () => {
   let component: UpdateUserComponent;

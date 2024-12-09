@@ -22,11 +22,18 @@ export class ListingService {
   }
 
   /**
-   * Fetch all listings
-   * @returns Observable<Listing[]> - List of all listings
+   * Fetch all listings with pagination
+   * @param pageNumber - Page number for pagination
+   * @param pageSize - Number of items per page
+   * @returns Observable<{ items: Listing[]; totalCount: number }> - Paginated listings and total count
    */
-  getAllListings(): Observable<Listing[]> {
-    return this.http.get<Listing[]>(`${this.baseUrl}`);
+  getAllListings(
+    pageNumber: number,
+    pageSize: number
+  ): Observable<{ items: Listing[]; totalCount: number }> {
+    return this.http.get<{ items: Listing[]; totalCount: number }>(
+      `${this.baseUrl}?pageNumber=${pageNumber}&pageSize=${pageSize}`
+    );
   }
 
   /**
@@ -34,9 +41,28 @@ export class ListingService {
    * @param userId - User ID
    * @returns Observable<Listing[]> - Listings for the given user
    */
-  // getAllListingsByUserId(userId: string): Observable<Listing[]> {
-  //   return this.http.get<Listing[]>(`${this.baseUrl}/User/${userId}`);
-  // }
+  getAllListingsByUserId(userId: string): Observable<Listing[]> {
+    return this.http.get<Listing[]>(`${this.baseUrl}/User/${userId}`);
+  }
+
+  /**
+   * Fetch all listings sorted by date in ascending order
+   * @returns Observable<Listing[]> - Listings sorted by date
+   */
+  getAllListingsByDateAscending(): Observable<Listing[]> {
+    return this.http.get<Listing[]>(
+      `http://localhost:5213/Listing/DateAscending`
+    );
+  }
+  /**
+   * Fetch all listings sorted by budget in ascending order
+   * @returns Observable<Listing[]> - Listings sorted by budget
+   */
+  getAllListingsByBudgetAscending(): Observable<Listing[]> {
+    return this.http.get<Listing[]>(
+      `http://localhost:5213/Listing/BudgetAscending`
+    );
+  }
 
   /**
    * Fetch a listing by ID

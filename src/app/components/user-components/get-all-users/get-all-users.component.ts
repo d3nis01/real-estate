@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { IUser } from '../../models/user';
-import { UserService } from '../../services/user-service/user.service';
+import { IUser } from '../../../models/user';
+import { UserService } from '../../../services/user-service/user.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -52,5 +52,11 @@ export class GetAllUsersComponent implements OnInit {
 
   goToDetailsUser(userId: string): void {
     this.router.navigate(['/details-user', userId]);
+  }
+  goToCreateListing(): void {
+    this.router.navigate(['/create-listing']);
+  }
+  goToGetAllListings(): void {
+    this.router.navigate(['/get-all-listings']);
   }
 }

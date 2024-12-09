@@ -6,8 +6,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserType } from '../../models/user';
-import { UserService } from '../../services/user-service/user.service';
+import { UserType } from '../../../models/user';
+import { UserService } from '../../../services/user-service/user.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

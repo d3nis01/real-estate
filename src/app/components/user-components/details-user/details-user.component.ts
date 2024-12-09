@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IUser } from '../../models/user';
-import { UserService } from '../../services/user-service/user.service';
+import { IUser } from '../../../models/user';
+import { UserService } from '../../../services/user-service/user.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

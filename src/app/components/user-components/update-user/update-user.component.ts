@@ -6,8 +6,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { UserService } from '../../services/user-service/user.service';
-import { IUser, UserType } from '../../models/user';
+import { UserService } from '../../../services/user-service/user.service';
+import { IUser, UserType } from '../../../models/user';
 import { CommonModule } from '@angular/common';
 
 @Component({

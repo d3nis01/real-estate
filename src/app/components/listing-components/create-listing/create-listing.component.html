@@ -1,0 +1,224 @@
+<div class="create-listing-page">
+  <div class="create-listing">
+    <div class="nav-bar">
+      <ul>
+        <li>
+          <a (click)="goToAllListings()" routerLink="/get-all-listings">
+            Back to Listings List
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <h2>Create Listing</h2>
+
+    <form
+      [formGroup]="listingForm"
+      (ngSubmit)="onSubmit()"
+      class="form-container"
+    >
+      <div class="fields-wrapper">
+        <!-- Title -->
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input id="title" formControlName="title" type="text" />
+          <small
+            *ngIf="
+              listingForm.get('title')?.invalid &&
+              listingForm.get('title')?.touched
+            "
+            class="error"
+          >
+            <span *ngIf="listingForm.get('title')?.errors?.['required']">
+              Title is required.
+            </span>
+            <span *ngIf="listingForm.get('title')?.errors?.['minlength']">
+              Title must be at least 5 characters long.
+            </span>
+            <span *ngIf="listingForm.get('title')?.errors?.['maxlength']">
+              Title must not exceed 100 characters.
+            </span>
+          </small>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" formControlName="description"></textarea>
+          <small
+            *ngIf="
+              listingForm.get('description')?.invalid &&
+              listingForm.get('description')?.touched
+            "
+            class="error"
+          >
+            <span *ngIf="listingForm.get('description')?.errors?.['required']">
+              Description is required.
+            </span>
+            <span *ngIf="listingForm.get('description')?.errors?.['minlength']">
+              Description must be at least 20 characters long.
+            </span>
+          </small>
+        </div>
+
+        <!-- Project Type -->
+        <div class="form-group">
+          <label for="projectType">Project Type</label>
+          <input id="projectType" formControlName="projectType" type="text" />
+          <small
+            *ngIf="
+              listingForm.get('projectType')?.invalid &&
+              listingForm.get('projectType')?.touched
+            "
+            class="error"
+          >
+            <span *ngIf="listingForm.get('projectType')?.errors?.['required']">
+              Project type is required.
+            </span>
+            <span *ngIf="listingForm.get('projectType')?.errors?.['maxlength']">
+              Project type must not exceed 50 characters.
+            </span>
+          </small>
+        </div>
+
+        <!-- City -->
+        <div class="form-group">
+          <label for="city">City</label>
+          <input id="city" formControlName="city" type="text" />
+          <small
+            *ngIf="
+              listingForm.get('city')?.invalid &&
+              listingForm.get('city')?.touched
+            "
+            class="error"
+          >
+            <span *ngIf="listingForm.get('city')?.errors?.['required']">
+              City is required.
+            </span>
+            <span *ngIf="listingForm.get('city')?.errors?.['maxlength']">
+              City must not exceed 100 characters.
+            </span>
+          </small>
+        </div>
+
+        <!-- Country -->
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input id="country" formControlName="country" type="text" />
+          <small
+            *ngIf="
+              listingForm.get('country')?.invalid &&
+              listingForm.get('country')?.touched
+            "
+            class="error"
+          >
+            <span *ngIf="listingForm.get('country')?.errors?.['required']">
+              Country is required.
+            </span>
+            <span *ngIf="listingForm.get('country')?.errors?.['maxlength']">
+              Country must not exceed 100 characters.
+            </span>
+          </small>
+        </div>
+
+        <!-- Blueprint -->
+        <div class="form-group">
+          <label for="blueprint">Blueprint URL</label>
+          <input id="blueprint" formControlName="blueprint" type="text" />
+          <small
+            *ngIf="
+              listingForm.get('blueprint')?.invalid &&
+              listingForm.get('blueprint')?.touched
+            "
+            class="error"
+          >
+            <span *ngIf="listingForm.get('blueprint')?.errors?.['maxlength']">
+              Blueprint URL must not exceed 200 characters.
+            </span>
+          </small>
+        </div>
+
+        <!-- Image -->
+        <div class="form-group">
+          <label for="image">Image URL</label>
+          <input id="image" formControlName="image" type="text" />
+          <small
+            *ngIf="
+              listingForm.get('image')?.invalid &&
+              listingForm.get('image')?.touched
+            "
+            class="error"
+          >
+            <span *ngIf="listingForm.get('image')?.errors?.['maxlength']">
+              Image URL must not exceed 200 characters.
+            </span>
+          </small>
+        </div>
+
+        <!-- Budget -->
+        <div class="form-group">
+          <label for="budget">Budget</label>
+          <input id="budget" formControlName="budget" type="number" />
+          <small
+            *ngIf="
+              listingForm.get('budget')?.invalid &&
+              listingForm.get('budget')?.touched
+            "
+            class="error"
+          >
+            <span *ngIf="listingForm.get('budget')?.errors?.['min']">
+              Budget must be greater than zero.
+            </span>
+          </small>
+        </div>
+
+        <!-- Status -->
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status" formControlName="status">
+            <option
+              *ngFor="let status of listingStatusOptions"
+              [value]="status"
+            >
+              {{ status }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Construction Deadline -->
+        <div class="form-group">
+          <label for="constructionDeadline">Construction Deadline</label>
+          <input
+            id="constructionDeadline"
+            formControlName="constructionDeadline"
+            type="date"
+          />
+          <small
+            *ngIf="
+              listingForm.get('constructionDeadline')?.invalid &&
+              listingForm.get('constructionDeadline')?.touched
+            "
+            class="error"
+          >
+            <span
+              *ngIf="listingForm.get('constructionDeadline')?.errors?.['date']"
+            >
+              Construction deadline must be in the future.
+            </span>
+          </small>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="buttons-wrapper">
+        <button
+          class="btn-submit"
+          type="submit"
+          [disabled]="listingForm.invalid || isSubmitting"
+        >
+          {{ isSubmitting ? "Creating..." : "Create Listing" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
