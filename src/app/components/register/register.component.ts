@@ -26,16 +26,20 @@ export class RegisterComponent {
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.registerForm = this.fb.group(
       {
-        email: ['', [Validators.required, Validators.email]], // Changed to 'email'
+        username: ['', [Validators.required, Validators.minLength(3)]],
+        email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required]],
+        city: ['', [Validators.required]],
       },
       { validators: this.passwordsMatchValidator }
     );
   }
 
   // Custom validator for password confirmation
-  passwordsMatchValidator(group: AbstractControl): ValidationErrors | null {
+  private passwordsMatchValidator(
+    group: AbstractControl
+  ): ValidationErrors | null {
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { passwordMismatch: true };
@@ -43,27 +47,49 @@ export class RegisterComponent {
 
   // Handle form submission
   onSubmit(): void {
-    if (this.registerForm.valid) {
-      this.isSubmitting = true;
-      this.successMessage = null;
-      this.errorMessage = null;
-
-      const { email, password } = this.registerForm.value;
-
-      this.authService.register({ email, password }).subscribe({
-        next: (response) => {
-          this.isSubmitting = false;
-          this.successMessage = response.message;
-        },
-        error: (err) => {
-          this.isSubmitting = false;
-          this.errorMessage =
-            err.error?.message || 'Registration failed. Please try again.';
-        },
-      });
-    } else {
+    if (this.registerForm.invalid) {
       this.errorMessage =
         'Please fix the errors in the form before submitting.';
+      return;
     }
+
+    this.isSubmitting = true;
+    this.successMessage = null;
+    this.errorMessage = null;
+
+    const { username, email, password, city } = this.registerForm.value;
+
+    this.authService.register({ username, email, password, city }).subscribe({
+      next: (response) => {
+        this.isSubmitting = false;
+        this.successMessage = 'Registration successful! Please log in.';
+      },
+      error: (err) => {
+        this.isSubmitting = false;
+        this.errorMessage =
+          err.error?.message || 'Registration failed. Please try again.';
+      },
+    });
+  }
+
+  // Getter for form controls (for easier access in the template)
+  get username() {
+    return this.registerForm.get('username');
+  }
+
+  get email() {
+    return this.registerForm.get('email');
+  }
+
+  get password() {
+    return this.registerForm.get('password');
+  }
+
+  get confirmPassword() {
+    return this.registerForm.get('confirmPassword');
+  }
+
+  get city() {
+    return this.registerForm.get('city');
   }
 }

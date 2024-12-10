@@ -7,10 +7,15 @@ import { CreateListingComponent } from './components/listing-components/create-l
 import { GetAllListingsComponent } from './components/listing-components/get-all-listings/get-all-listings.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AuthGuard } from './services/auth-service/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/get-all-users', pathMatch: 'full' },
-  { path: 'get-all-users', component: GetAllUsersComponent },
+  {
+    path: 'get-all-users',
+    component: GetAllUsersComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'create-user', component: CreateUserComponent },
   { path: 'update-user/:id', component: UpdateUserComponent },
   { path: 'details-user/:id', component: DetailUserComponent },
