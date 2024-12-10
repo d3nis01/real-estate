@@ -1,13 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth-service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,37 +12,54 @@ import { AuthService } from '../../services/auth-service/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
+export class LoginComponent {
+  loginForm: FormGroup;
+  isSubmitting = false;
+  successMessage: string | null = null;
   errorMessage: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
-  ) {}
-
-  ngOnInit(): void {
-    this.initializeForm();
-  }
-
-  initializeForm() {
+  ) {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
+      username: ['', [Validators.required, Validators.minLength(3)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
+  // Handle form submission
   onSubmit(): void {
-    if (this.loginForm.invalid) return;
+    if (this.loginForm.invalid) {
+      this.errorMessage = 'Please fill out all required fields.';
+      return;
+    }
+
+    this.isSubmitting = true;
+    this.successMessage = null;
+    this.errorMessage = null;
 
     const { username, password } = this.loginForm.value;
 
-    this.authService.login({ username: username, password }).subscribe({
-      next: () => this.router.navigate(['/dashboard']),
+    this.authService.login({ username, password }).subscribe({
+      next: () => {
+        this.isSubmitting = false;
+        this.successMessage = 'Login successful!';
+        this.router.navigate(['/get-all-users']); // Redirect after successful login
+      },
       error: (err) => {
+        this.isSubmitting = false;
         this.errorMessage = err.error?.message || 'Invalid login credentials.';
       },
     });
+  }
+
+  get username() {
+    return this.loginForm.get('username');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
   }
 }

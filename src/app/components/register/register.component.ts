@@ -9,6 +9,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth-service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +24,7 @@ export class RegisterComponent {
   successMessage: string | null = null;
   errorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.registerForm = this.fb.group(
       {
         username: ['', [Validators.required, Validators.minLength(3)]],
@@ -63,6 +64,7 @@ export class RegisterComponent {
       next: (response) => {
         this.isSubmitting = false;
         this.successMessage = 'Registration successful! Please log in.';
+         this.router.navigate(['/login']);
       },
       error: (err) => {
         this.isSubmitting = false;

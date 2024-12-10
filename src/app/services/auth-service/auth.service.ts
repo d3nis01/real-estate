@@ -1,74 +1,56 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = environment.apiUrl + '/Auth'; // Base URL for authentication endpoints
-  private tokenKey = 'auth-token';
-  private currentUserSubject = new BehaviorSubject<any>(null);
+  private baseUrl = environment.apiUrl + '/Auth';
+  private currentUserSubject = new BehaviorSubject<any>(null); 
 
   constructor(private http: HttpClient) {
-    const token = this.getToken();
-    if (token) {
-      this.currentUserSubject.next(this.decodeToken(token));
-    }
+    this.checkAuthStatus(); 
   }
 
-  // Register method
-  register(user: { username:string; email: string; password: string; city:string }): Observable<any> {
+  register(user: {
+    username: string;
+    email: string;
+    password: string;
+    city: string;
+  }): Observable<any> {
     return this.http.post(`${this.baseUrl}/register`, user); // Call the backend register endpoint
   }
 
   login(credentials: { username: string; password: string }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/login`, credentials).pipe(
-      tap((response: any) => {
-        this.setToken(response.token);
-        this.currentUserSubject.next(this.decodeToken(response.token));
-      })
-    );
+    return this.http
+      .post(`${this.baseUrl}/login`, credentials, { withCredentials: true })
+      .pipe(
+        tap(() => {
+          this.checkAuthStatus(); 
+        })
+      );
   }
 
-  logout(): void {
-    this.clearToken();
-    this.currentUserSubject.next(null);
-  }
-
+  // Get the current user as an observable
   getCurrentUser(): Observable<any> {
     return this.currentUserSubject.asObservable();
   }
 
+  // Check if the user is authenticated
   isAuthenticated(): boolean {
-    const token = this.getToken();
-    return !!token && !this.isTokenExpired(token);
+    return this.currentUserSubject.value !== null;
   }
 
-  public getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
-  }
-
-  private setToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
-  }
-
-  private clearToken(): void {
-    localStorage.removeItem(this.tokenKey);
-  }
-
-  private decodeToken(token: string): any {
-    try {
-      return JSON.parse(atob(token.split('.')[1]));
-    } catch {
-      return null;
-    }
-  }
-
-  private isTokenExpired(token: string): boolean {
-    const payload = this.decodeToken(token);
-    return payload && payload.exp * 1000 < Date.now();
+  private checkAuthStatus(): void {
+    this.http.get(`${this.baseUrl}/me`, { withCredentials: true }).subscribe({
+      next: (user: any) => {
+        this.currentUserSubject.next(user); 
+      },
+      error: () => {
+        this.currentUserSubject.next(null); 
+      },
+    });
   }
 }
