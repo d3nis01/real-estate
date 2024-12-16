@@ -1,12 +1,14 @@
 .sidebar-container {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px);
+  height: max-content;
   width: 240px;
   background-color: #fff;
   border-right: 1px solid #ddd;
   z-index: 1000;
   padding: 12px 0 12px 32px;
+  height: 100%;
 
   @media (max-width: 992px) {
     display: none;

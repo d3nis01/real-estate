@@ -1,59 +1,67 @@
-<div class="nav-bar">
-  <ul>
-    <li>
-      <a (click)="goToCreateUser()" routerLink="/create-user">Create User</a>
-      <a (click)="goToGetAllListings()" routerLink="/get-all-listings"
-        >All Listings</a
+<div class="getallusers-container">
+  <div class="nav-bar">
+    <button
+      class="getallusers-button"
+      (click)="goToCreateUser()"
+      routerLink="/create-user"
+    >
+      Create User
+    </button>
+    <button
+      class="getallusers-button"
+      (click)="goToGetAllCompanies()"
+      routerLink="/get-all-companies"
+    >
+      All Companies
+    </button>
+  </div>
+
+  <div class="user-table">
+    <table class="table-styling">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.username }}</td>
+          <td>{{ user.firstName }}</td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <button
+              (click)="goToDetailsUser(user.id)"
+              routerLink="/details-user/:id"
+              class="details-button"
+            >
+              Details
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <button
+        class="pagination-button"
+        (click)="previousPage()"
+        [disabled]="pageNumber === 1"
       >
-    </li>
-  </ul>
-</div>
-
-<div class="user-table">
-  <table class="table-styling">
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <td>{{ user.username }}</td>
-        <td>{{ user.firstName }}</td>
-        <td>{{ user.lastName }}</td>
-        <td>{{ user.email }}</td>
-        <td>
-          <button
-            (click)="goToDetailsUser(user.id)"
-            routerLink="/details-user/:id"
-            class="details-button"
-          >
-            Details
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="pagination">
-    <button
-      class="pagination-button"
-      (click)="previousPage()"
-      [disabled]="pageNumber === 1"
-    >
-      Previous
-    </button>
-    <span>Page {{ pageNumber }}</span>
-    <button
-      class="pagination-button"
-      (click)="nextPage()"
-      [disabled]="pageNumber * pageSize >= totalCount"
-    >
-      Next
-    </button>
+        Previous
+      </button>
+      <span>Page {{ pageNumber }}</span>
+      <button
+        class="pagination-button"
+        (click)="nextPage()"
+        [disabled]="pageNumber * pageSize >= totalCount"
+      >
+        Next
+      </button>
+    </div>
   </div>
 </div>

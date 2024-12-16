@@ -1,8 +1,32 @@
+.update-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: calc(100vw - 240px);
+  background-color: #fff;
+
+  @media (max-width: 992px) {
+    width: 100vw;
+  }
+}
+
 .update-user-page {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100dvh;
+  height: 100%;
+  width: calc(100vw - 240px);
+  background-color: #f9f9f9;
+
+  @media (max-width: 992px) {
+    width: 100vw;
+  }
+
+  @media (max-width: 474px) {
+    height: max-content;
+  }
 }
 
 .update-user {

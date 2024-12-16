@@ -2,55 +2,70 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private baseUrl = environment.apiUrl + '/Auth';
-  private currentUserSubject = new BehaviorSubject<any>(null); 
+  private currentUserSubject = new BehaviorSubject<any>(null);
 
   constructor(private http: HttpClient) {
-    this.checkAuthStatus(); 
+    this.checkAuthStatus();
   }
 
+  // Register user
   register(user: {
     username: string;
     email: string;
     password: string;
     city: string;
   }): Observable<any> {
-    return this.http.post(`${this.baseUrl}/register`, user); // Call the backend register endpoint
+    return this.http.post(`${this.baseUrl}/register`, user);
   }
 
+  // Login user
   login(credentials: { username: string; password: string }): Observable<any> {
     return this.http
       .post(`${this.baseUrl}/login`, credentials, { withCredentials: true })
       .pipe(
         tap(() => {
-          this.checkAuthStatus(); 
+          this.checkAuthStatus();
         })
       );
   }
 
-  // Get the current user as an observable
   getCurrentUser(): Observable<any> {
     return this.currentUserSubject.asObservable();
   }
 
-  // Check if the user is authenticated
   isAuthenticated(): boolean {
     return this.currentUserSubject.value !== null;
   }
 
   private checkAuthStatus(): void {
-    this.http.get(`${this.baseUrl}/me`, { withCredentials: true }).subscribe({
-      next: (user: any) => {
-        this.currentUserSubject.next(user); 
-      },
-      error: () => {
-        this.currentUserSubject.next(null); 
-      },
-    });
+    this.http
+      .get<{ userId: string }>(`${this.baseUrl}/me`, { withCredentials: true })
+      .subscribe({
+        next: (response) => {
+          this.currentUserSubject.next(
+            response.userId ? { userId: response.userId } : null
+          );
+        },
+        error: () => {
+          this.currentUserSubject.next(null);
+        },
+      });
+  }
+
+  logout(): Observable<void> {
+    return this.http
+      .post<void>(`${this.baseUrl}/logout`, {}, { withCredentials: true })
+      .pipe(
+        tap(() => {
+          this.currentUserSubject.next(null);
+        })
+      );
   }
 }

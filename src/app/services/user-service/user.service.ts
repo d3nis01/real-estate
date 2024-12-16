@@ -13,29 +13,39 @@ export class UserService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  // Get users with pagination
   getAllUsers(
     pageNumber: number,
     pageSize: number
   ): Observable<{ items: IUser[]; totalCount: number }> {
     return this.http.get<{ items: IUser[]; totalCount: number }>(
-      `${this.baseUrl}?pageNumber=${pageNumber}&pageSize=${pageSize}`
+      `${this.baseUrl}?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+      {
+        withCredentials: true,
+      }
     );
   }
 
   getUserById(id: string): Observable<IUser> {
-    return this.http.get<IUser>(`${this.baseUrl}/${id}`);
+    return this.http.get<IUser>(`${this.baseUrl}/${id}`, {
+      withCredentials: true,
+    });
   }
 
   createUser(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>(`${this.baseUrl}`, user);
+    return this.http.post<IUser>(`${this.baseUrl}`, user, {
+      withCredentials: true,
+    });
   }
 
   updateUser(id: string, user: IUser): Observable<IUser> {
-    return this.http.put<IUser>(`${this.baseUrl}/${id}`, user);
+    return this.http.put<IUser>(`${this.baseUrl}/${id}`, user, {
+      withCredentials: true,
+    });
   }
 
   deleteUser(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+    return this.http.delete<void>(`${this.baseUrl}/${id}`, {
+      withCredentials: true,
+    });
   }
 }

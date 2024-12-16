@@ -8,13 +8,30 @@
     >
       ☰
     </button>
-    <div class="header-title">SmartEstate</div>
-  </div>
-  <div class="header-right-side">
-    <div class="header-buttons">
-      <button class="register-button" (click)="goToRegister()">Register</button>
-      <button class="login-button" (click)="goToLogin()">Login</button>
+    <div class="header-details-container">
+      <img src="./logo.png" class="header-logo" alt="Logo" />
+      <div class="header-title">SmartEstate</div>
     </div>
+  </div>
+
+  <div class="header-right-side">
+    <ng-container *ngIf="isLoggedIn; else guestButtons">
+      <div class="header-user-info">
+        <span>Welcome, {{ username }}</span>
+        <button class="logout-button" (click)="logout()" aria-label="Logout">
+          Logout
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-template #guestButtons>
+      <div class="header-buttons">
+        <button class="register-button" (click)="goToRegister()">
+          Register
+        </button>
+        <button class="login-button" (click)="goToLogin()">Login</button>
+      </div>
+    </ng-template>
   </div>
 </header>
 

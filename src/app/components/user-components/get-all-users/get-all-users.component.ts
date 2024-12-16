@@ -56,7 +56,7 @@ export class GetAllUsersComponent implements OnInit {
   goToCreateListing(): void {
     this.router.navigate(['/create-listing']);
   }
-  goToGetAllListings(): void {
-    this.router.navigate(['/get-all-listings']);
+  goToGetAllCompanies(): void {
+    this.router.navigate(['/get-all-companies']);
   }
 }

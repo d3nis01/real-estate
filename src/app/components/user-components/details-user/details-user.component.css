@@ -1,5 +1,19 @@
-/* User Details Styling */
+.details-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: calc(100vw - 240px);
+  background-color: #fff;
+
+  @media (max-width: 992px) {
+    width: 100vw;
+  }
+}
+
 .user-details {
+  width: 100%;
   max-width: 800px;
   margin: 20px auto;
   padding: 20px;

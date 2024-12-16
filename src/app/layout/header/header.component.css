@@ -18,6 +18,18 @@
   align-items: center;
 }
 
+.header-details-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logo {
+  object-fit: contain;
+  height: 100%;
+  width: auto;
+}
+
 .header-title {
   font-size: 24px;
   font-weight: 600;
@@ -105,4 +117,21 @@
   .header-left-side {
     gap: 8px;
   }
+}
+
+.logout-button {
+  margin-left: 12px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #e3342f;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #cc1f1a;
 }
