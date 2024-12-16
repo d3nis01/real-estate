@@ -28,6 +28,16 @@ export class SidebarMobileComponent {
     this.closeSidebar();
   }
 
+  goToCreateCompany() {
+    this.router.navigate(['/create-company']);
+    this.closeSidebar();
+  }
+
+  goToGetAllCompanies() {
+    this.router.navigate(['/get-all-companies']);
+    this.closeSidebar();
+  }
+
   goToCreateListing() {
     this.router.navigate(['/create-listing']);
     this.closeSidebar();

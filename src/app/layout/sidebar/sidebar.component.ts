@@ -38,6 +38,14 @@ export class SidebarComponent {
     this.router.navigate(['/price-prediction']);
   }
 
+  goToGetAllCompanies() {
+    this.router.navigate(['/get-all-companies']);
+  }
+
+  goToCreateCompany() {
+    this.router.navigate(['/create-company']);
+  }
+
   isActive(route: string): boolean {
     return this.router.url === route;
   }

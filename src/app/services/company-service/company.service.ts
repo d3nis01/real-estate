@@ -25,8 +25,16 @@ export class CompanyService {
    * Fetch all companies
    * @returns Observable<ICompany[]> - List of all companies
    */
-  getAllCompanies(): Observable<ICompany[]> {
-    return this.http.get<ICompany[]>(`${this.baseUrl}`);
+  getAllCompanies(
+    pageNumber: number,
+    pageSize: number
+  ): Observable<{ items: ICompany[]; totalCount: number }> {
+    return this.http.get<{ items: ICompany[]; totalCount: number }>(
+      `${this.baseUrl}?pageNumber=${pageNumber}&pageSize=${pageSize}`,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   /**

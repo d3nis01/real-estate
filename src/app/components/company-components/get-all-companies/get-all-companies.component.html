@@ -1,1 +1,60 @@
-<p>get-all-companies works!</p>
+<div class="getallcompanies-container">
+  <div class="nav-bar">
+    <button
+      class="getallcompanies-button"
+      (click)="goToCreateCompany()"
+      routerLink="/create-company"
+    >
+      Create Company
+    </button>
+  </div>
+
+  <div class="company-table">
+    <table class="table-styling">
+      <thead>
+        <tr>
+          <th>Company Name</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>City</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let company of companies">
+          <td>{{ company.name }}</td>
+          <td>{{ company.email }}</td>
+          <td>{{ company.phoneNumber }}</td>
+          <td>{{ company.city }}</td>
+          <td>
+            <button
+              (click)="goToDetailsCompany(company.id)"
+              routerLink="/details-company/:id"
+              class="details-button"
+            >
+              Details
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination">
+      <button
+        class="pagination-button"
+        (click)="previousPage()"
+        [disabled]="pageNumber === 1"
+      >
+        Previous
+      </button>
+      <span>Page {{ pageNumber }}</span>
+      <button
+        class="pagination-button"
+        (click)="nextPage()"
+        [disabled]="pageNumber * pageSize >= totalCount"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</div>

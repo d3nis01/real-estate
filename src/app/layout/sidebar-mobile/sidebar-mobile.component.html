@@ -11,13 +11,6 @@
     <div class="sidebar-elements-list">
       <div
         class="sidebar-element"
-        [ngClass]="{ 'active-sidebar-element': isActive('/create-user') }"
-        (click)="goToCreateUser()"
-      >
-        Create User
-      </div>
-      <div
-        class="sidebar-element"
         [ngClass]="{ 'active-sidebar-element': isActive('/get-all-users') }"
         (click)="goToGetAllUsers()"
       >
@@ -25,18 +18,19 @@
       </div>
       <div
         class="sidebar-element"
-        [ngClass]="{ 'active-sidebar-element': isActive('/create-listing') }"
-        (click)="goToCreateListing()"
+        [ngClass]="{ 'active-sidebar-element': isActive('/create-company') }"
+        (click)="goToCreateCompany()"
       >
-        Create Listing
+        Create Company
       </div>
       <div
         class="sidebar-element"
-        [ngClass]="{ 'active-sidebar-element': isActive('/get-all-listings') }"
-        (click)="goToGetAllListings()"
+        [ngClass]="{ 'active-sidebar-element': isActive('/get-all-companies') }"
+        (click)="goToGetAllCompanies()"
       >
-        All Listings
+        All Companies
       </div>
+
       <div
         class="sidebar-element"
         [ngClass]="{ 'active-sidebar-element': isActive('/price-prediction') }"

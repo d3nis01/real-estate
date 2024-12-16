@@ -1,1 +1,177 @@
-<p>create-company works!</p>
+<div class="create-company-page">
+  <div class="create-company">
+    <div class="nav-bar">
+      <ul>
+        <li>
+          <a (click)="goToAllCompanies()" routerLink="/get-all-companies">
+            Back to Companies List
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <h2 class="text-xxl font-bold">Create Company</h2>
+
+    <form
+      [formGroup]="companyForm"
+      (ngSubmit)="onSubmit()"
+      class="form-container"
+    >
+      <div class="fields-wrapper">
+        <!-- Name -->
+        <div class="form-group">
+          <label for="name">Company Name</label>
+          <input id="name" formControlName="name" type="text" />
+          <small
+            *ngIf="
+              companyForm.get('name')?.invalid &&
+              companyForm.get('name')?.touched
+            "
+            class="error"
+          >
+            <span *ngIf="companyForm.get('name')?.errors?.['required']">
+              Company name is required.
+            </span>
+            <span *ngIf="companyForm.get('name')?.errors?.['minlength']">
+              Company name must be at least 3 characters long.
+            </span>
+            <span *ngIf="companyForm.get('name')?.errors?.['maxlength']">
+              Company name must not exceed 100 characters.
+            </span>
+          </small>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" formControlName="email" type="email" />
+          <small
+            *ngIf="
+              companyForm.get('email')?.invalid &&
+              companyForm.get('email')?.touched
+            "
+            class="error"
+          >
+            <span *ngIf="companyForm.get('email')?.errors?.['required']">
+              Email is required.
+            </span>
+            <span *ngIf="companyForm.get('email')?.errors?.['email']">
+              Invalid email format.
+            </span>
+          </small>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number</label>
+          <input id="phoneNumber" formControlName="phoneNumber" type="text" />
+          <small
+            *ngIf="
+              companyForm.get('phoneNumber')?.invalid &&
+              companyForm.get('phoneNumber')?.touched
+            "
+            class="error"
+          >
+            <span *ngIf="companyForm.get('phoneNumber')?.errors?.['required']">
+              Phone number is required.
+            </span>
+            <span *ngIf="companyForm.get('phoneNumber')?.errors?.['pattern']">
+              Phone number must be between 7 and 15 digits.
+            </span>
+          </small>
+        </div>
+
+        <!-- City -->
+        <div class="form-group">
+          <label for="city">City</label>
+          <input id="city" formControlName="city" type="text" />
+          <small
+            *ngIf="
+              companyForm.get('city')?.invalid &&
+              companyForm.get('city')?.touched
+            "
+            class="error"
+          >
+            <span *ngIf="companyForm.get('city')?.errors?.['required']">
+              City is required.
+            </span>
+            <span *ngIf="companyForm.get('city')?.errors?.['maxlength']">
+              City must not exceed 100 characters.
+            </span>
+          </small>
+        </div>
+
+        <!-- Country -->
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input id="country" formControlName="country" type="text" />
+          <small
+            *ngIf="
+              companyForm.get('country')?.invalid &&
+              companyForm.get('country')?.touched
+            "
+            class="error"
+          >
+            <span *ngIf="companyForm.get('country')?.errors?.['required']">
+              Country is required.
+            </span>
+            <span *ngIf="companyForm.get('country')?.errors?.['maxlength']">
+              Country must not exceed 100 characters.
+            </span>
+          </small>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" formControlName="description"></textarea>
+          <small
+            *ngIf="
+              companyForm.get('description')?.invalid &&
+              companyForm.get('description')?.touched
+            "
+            class="error"
+          >
+            <span *ngIf="companyForm.get('description')?.errors?.['maxlength']">
+              Description must not exceed 500 characters.
+            </span>
+          </small>
+        </div>
+
+        <!-- Profile Picture -->
+        <div class="form-group">
+          <label for="profilePicture">Profile Picture URL</label>
+          <input
+            id="profilePicture"
+            formControlName="profilePicture"
+            type="text"
+          />
+          <small
+            *ngIf="
+              companyForm.get('profilePicture')?.invalid &&
+              companyForm.get('profilePicture')?.touched
+            "
+            class="error"
+          >
+            <span
+              *ngIf="companyForm.get('profilePicture')?.errors?.['maxlength']"
+            >
+              Profile picture URL must not exceed 2048 characters.
+            </span>
+          </small>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="buttons-wrapper">
+        <button
+          class="btn-submit"
+          type="submit"
+          [disabled]="companyForm.invalid || isSubmitting"
+        >
+          {{ isSubmitting ? "Creating..." : "Create Company" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

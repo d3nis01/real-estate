@@ -1,0 +1,160 @@
+.getallcompanies-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 8px;
+
+  width: calc(100vw - 240px);
+  background-color: #fff;
+
+  @media (max-width: 992px) {
+    width: 100vw;
+  }
+}
+
+/* Navigation Bar Styling */
+.nav-bar {
+  padding: 12px;
+  display: flex;
+  gap: 16px;
+}
+
+.getallcompanies-button {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.getallcompanies-button:hover {
+  background-color: #0056b3;
+}
+
+/* Company Table Styling */
+.company-table {
+  padding: 1rem 0;
+  max-width: 1200px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+
+  @media (max-width: 690px) {
+    width: 100%;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+thead {
+  background-color: #007bff;
+  color: white;
+}
+
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+
+  @media (max-width: 690px) {
+    padding: 8px 10px;
+  }
+}
+
+th {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+td {
+  font-size: 14px;
+  color: #555;
+  word-break: break-word;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* Details Button Styling */
+.details-button {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  @media (max-width: 690px) {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+}
+
+.details-button:hover {
+  background-color: #0056b3;
+}
+
+/* Pagination Styling */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 0;
+  font-size: 16px;
+}
+
+.pagination-button {
+  padding: 10px 15px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  width: 100px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pagination-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.pagination-button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.pagination span {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Media query for max-width 690px */
+@media (max-width: 690px) {
+  th:nth-child(2),
+  th:nth-child(3) {
+    display: none;
+  }
+
+  td:nth-child(2),
+  td:nth-child(3) {
+    display: none;
+  }
+}

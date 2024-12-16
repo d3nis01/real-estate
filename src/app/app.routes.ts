@@ -9,6 +9,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './services/auth-service/auth.guard';
 import { PredictionPageComponent } from './components/prediction-page/prediction-page.component';
+import { GetAllCompaniesComponent } from './components/company-components/get-all-companies/get-all-companies.component';
+import { CreateCompanyComponent } from './components/company-components/create-company/create-company.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/get-all-users', pathMatch: 'full' },
@@ -25,4 +27,12 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'price-prediction', component: PredictionPageComponent },
+  {
+    path: 'get-all-companies',
+    component: GetAllCompaniesComponent,
+  },
+  {
+    path: 'create-company',
+    component: CreateCompanyComponent,
+  },
 ];
