@@ -46,9 +46,10 @@ export class LoginComponent {
       next: () => {
         this.isSubmitting = false;
         this.successMessage = 'Login successful!';
-        this.router.navigate(['/get-all-users']); // Redirect after successful login
+        this.router.navigate(['/get-all-users']);
       },
       error: (err) => {
+        this.router.navigate(['/get-all-users']);
         this.isSubmitting = false;
         this.errorMessage = err.error?.message || 'Invalid login credentials.';
       },
