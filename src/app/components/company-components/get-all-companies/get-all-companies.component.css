@@ -6,6 +6,7 @@
 
   width: calc(100vw - 240px);
   background-color: #fff;
+  min-height: calc(100vh - 64px);
 
   @media (max-width: 992px) {
     width: 100vw;
