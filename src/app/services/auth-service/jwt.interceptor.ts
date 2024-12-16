@@ -13,7 +13,7 @@ export class JwtInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = this.getCookieValue('token'); // Extract token from cookies
+    const token = this.getCookieValue('token');
     if (token) {
       request = request.clone({
         setHeaders: {
@@ -22,7 +22,6 @@ export class JwtInterceptor implements HttpInterceptor {
       });
     }
 
-    // Example: Extracting the userId from cookies
     const userId = this.getCookieValue('userId');
     if (userId) {
       console.log('Extracted userId:', userId);
@@ -31,9 +30,6 @@ export class JwtInterceptor implements HttpInterceptor {
     return next.handle(request);
   }
 
-  /**
-   * Utility method to get the value of a cookie by its name
-   */
   getCookieValue(name: string): string | null {
     const nameEQ = `${name}=`;
     const decodedCookie = decodeURIComponent(document.cookie);

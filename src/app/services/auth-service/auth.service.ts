@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { jwtDecode } from 'jwt-decode';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -15,7 +13,6 @@ export class AuthService {
     this.checkAuthStatus();
   }
 
-  // Register user
   register(user: {
     username: string;
     email: string;
@@ -25,10 +22,11 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/register`, user);
   }
 
-  // Login user
   login(credentials: { username: string; password: string }): Observable<any> {
     return this.http
-      .post(`${this.baseUrl}/login`, credentials, { withCredentials: true })
+      .post(`${this.baseUrl}/login`, credentials, {
+        withCredentials: true,
+      })
       .pipe(
         tap(() => {
           this.checkAuthStatus();

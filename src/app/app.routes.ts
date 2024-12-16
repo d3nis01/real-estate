@@ -13,7 +13,7 @@ import { GetAllCompaniesComponent } from './components/company-components/get-al
 import { CreateCompanyComponent } from './components/company-components/create-company/create-company.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/get-all-users', pathMatch: 'full' },
+  { path: '', redirectTo: '/get-all-companies', pathMatch: 'full' },
   {
     path: 'get-all-users',
     component: GetAllUsersComponent,

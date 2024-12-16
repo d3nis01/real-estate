@@ -1,5 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { ICompany } from '../../models/company';
 import { CompanyService } from './company.service';
 import { environment } from '../../../environments/environment';
@@ -71,11 +74,16 @@ describe('CompanyService', () => {
   });
 
   it('should update a company', () => {
-    const updatedCompany: ICompany = { ...mockCompany, name: 'Updated Company' };
+    const updatedCompany: ICompany = {
+      ...mockCompany,
+      name: 'Updated Company',
+    };
 
-    service.updateCompany(mockCompany.id, updatedCompany).subscribe((company: any) => {
-      expect(company).toEqual(updatedCompany);
-    });
+    service
+      .updateCompany(mockCompany.id, updatedCompany)
+      .subscribe((company: any) => {
+        expect(company).toEqual(updatedCompany);
+      });
 
     const req = httpMock.expectOne(`${baseUrl}/${mockCompany.id}`);
     expect(req.request.method).toBe('PUT');
@@ -84,7 +92,7 @@ describe('CompanyService', () => {
   });
 
   it('should delete a company by ID', () => {
-    service.deleteCompany(mockCompany.id).subscribe(response => {
+    service.deleteCompany(mockCompany.id).subscribe((response) => {
       expect(response).toBeNull(); // Allow null as a valid response
     });
 

@@ -12,8 +12,8 @@ import { PredictionService } from '../../services/prediction-service/prediction.
 })
 export class PredictionPageComponent {
   country: string = '';
-  countrycode: string = '';
-  date: string = ''; // User-provided date
+  countrycode: string = 'RO';
+  date: string = '';
   predictionResult: string | null = null;
   error: string | null = null;
 

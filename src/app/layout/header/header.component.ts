@@ -65,9 +65,6 @@ export class HeaderComponent implements OnInit {
     console.log('Sidebar closed');
   }
 
-  /**
-   * Log out the user.
-   */
   logout(): void {
     this.authService.logout().subscribe({
       next: () => {

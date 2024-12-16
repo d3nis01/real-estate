@@ -4,9 +4,7 @@
   >
     <h1 class="text-xl font-semibold mb-4">Prediction Form</h1>
 
-    <!-- Form -->
     <form (ngSubmit)="onSubmit()" class="space-y-4">
-      <!-- Country -->
       <div class="form-group">
         <label for="country" class="block font-medium text-gray-700 mb-1"
           >Country</label
@@ -21,22 +19,6 @@
         />
       </div>
 
-      <!-- Country Code -->
-      <div class="form-group">
-        <label for="countrycode" class="block font-medium text-gray-700 mb-1"
-          >Country Code</label
-        >
-        <input
-          type="text"
-          id="countrycode"
-          class="form-control w-full px-4 py-2 border border-gray-300 rounded-md"
-          [(ngModel)]="countrycode"
-          name="countrycode"
-          required
-        />
-      </div>
-
-      <!-- Date -->
       <div class="form-group">
         <label for="date" class="block font-medium text-gray-700 mb-1"
           >Date</label
@@ -51,10 +33,8 @@
         />
       </div>
 
-      <!-- Error Message -->
       <div *ngIf="error" class="text-destructive">{{ error }}</div>
 
-      <!-- Submit and Clear Buttons -->
       <div class="flex justify-between items-center mt-4">
         <button
           type="submit"
@@ -73,7 +53,6 @@
     </form>
   </div>
 
-  <!-- Prediction Result -->
   <div
     *ngIf="predictionResult"
     class="prediction-container w-full max-w-[600px] bg-white shadow-lg rounded-lg p-6"

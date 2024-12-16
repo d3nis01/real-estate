@@ -29,7 +29,6 @@ export class LoginComponent {
     });
   }
 
-  // Handle form submission
   onSubmit(): void {
     if (this.loginForm.invalid) {
       this.errorMessage = 'Please fill out all required fields.';
@@ -46,10 +45,9 @@ export class LoginComponent {
       next: () => {
         this.isSubmitting = false;
         this.successMessage = 'Login successful!';
-        this.router.navigate(['/get-all-users']);
+        this.router.navigate(['/']);
       },
       error: (err) => {
-        this.router.navigate(['/get-all-users']);
         this.isSubmitting = false;
         this.errorMessage = err.error?.message || 'Invalid login credentials.';
       },

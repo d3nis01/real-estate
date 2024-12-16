@@ -43,7 +43,7 @@ export class CreateCompanyComponent implements OnInit {
       city: ['', [Validators.required, Validators.maxLength(100)]],
       country: ['', [Validators.required, Validators.maxLength(100)]],
       description: ['', [Validators.maxLength(500)]],
-      profilePicture: ['', Validators.maxLength(2048)], // URL or image path
+      profilePicture: ['', Validators.maxLength(2048)],
     });
   }
 
@@ -57,7 +57,7 @@ export class CreateCompanyComponent implements OnInit {
       this.companyService.createCompany(this.companyForm.value).subscribe({
         next: () => {
           this.isSubmitting = false;
-          this.router.navigate(['/get-all-companies']); // Navigate to the list of companies
+          this.router.navigate(['/get-all-companies']);
         },
         error: (errorResponse) => {
           this.isSubmitting = false;
