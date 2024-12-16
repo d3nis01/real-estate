@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
     this.authService.getCurrentUser().subscribe((user) => {
       this.isLoggedIn = !!user;
       this.currentUser = user;
-      console.log('Current User:', this.currentUser);
     });
   }
 }

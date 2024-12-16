@@ -38,7 +38,6 @@ export class HeaderComponent implements OnInit {
   private fetchUsername(userId: string): void {
     this.userService.getUserById(userId).subscribe({
       next: (userData) => {
-        console.log('User', userData);
         this.username = userData.username;
       },
       error: (err) => {
@@ -57,12 +56,10 @@ export class HeaderComponent implements OnInit {
 
   toggleSidebar() {
     this.isSidebarVisible = !this.isSidebarVisible;
-    console.log('Sidebar visibility toggled:', this.isSidebarVisible);
   }
 
   closeSidebar() {
     this.isSidebarVisible = false;
-    console.log('Sidebar closed');
   }
 
   logout(): void {
@@ -71,7 +68,6 @@ export class HeaderComponent implements OnInit {
         this.isLoggedIn = false;
         this.username = null;
         this.router.navigate(['/login']);
-        console.log('User logged out');
       },
       error: (err) => {
         console.error('Failed to log out:', err);
