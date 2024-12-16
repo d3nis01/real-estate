@@ -13,7 +13,9 @@ export class CompanyService {
   constructor(private http: HttpClient) {}
 
   createCompany(company: ICompany): Observable<ICompany> {
-    return this.http.post<ICompany>(`${this.baseUrl}`, company);
+    return this.http.post<ICompany>(`${this.baseUrl}`, company, {
+      withCredentials: true,
+    });
   }
 
   getAllCompanies(
