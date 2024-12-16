@@ -3,6 +3,10 @@
   background-color: #007bff;
   padding: 1rem;
   margin-bottom: 2rem;
+
+  @media (max-width: 992px) {
+    width: 100vw;
+  }
 }
 
 .nav-bar ul {

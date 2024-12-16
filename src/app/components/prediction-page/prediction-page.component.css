@@ -1,0 +1,34 @@
+.prediction-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: calc(100vw - 240px);
+  height: 100%;
+  background-color: #f9f9f9;
+  gap: 16px;
+
+  @media (max-width: 992px) {
+    width: 100vw;
+  }
+}
+
+.preditiction-container {
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 14px;
+}

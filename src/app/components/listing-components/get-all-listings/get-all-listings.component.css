@@ -1,6 +1,13 @@
 .listing-details {
   padding: 20px;
+  background-color: #f9f9f9;
   font-family: Arial, sans-serif;
+  width: calc(100vw - 240px);
+  height: 100%;
+
+  @media (max-width: 992px) {
+    width: 100vw;
+  }
 }
 .filters-wrapper {
   margin-bottom: 20px;

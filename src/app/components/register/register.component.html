@@ -1,6 +1,6 @@
 <div class="register-page">
-  <div class="register-container">
-    <h2>Register</h2>
+  <div class="register-container w-full max-w-[400px]">
+    <h2 class="text-xxl font-bold">Register</h2>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <!-- Username -->
       <div class="form-group">
@@ -40,15 +40,22 @@
       <!-- Password -->
       <div class="form-group">
         <label for="password">Password</label>
-        <input id="password" formControlName="password" type="password" />
+        <input id="password" type="password" formControlName="password" />
+        <!-- <div *ngIf="password?.hasError('required')">Password is required.</div> -->
         <small *ngIf="password?.invalid && password?.touched" class="error">
           <span *ngIf="password?.errors?.['required']"
             >Password is required.</span
           >
-          <span *ngIf="password?.errors?.['minlength']"
-            >Password must be at least 6 characters long.</span
-          >
         </small>
+        <div class="text-destructive text-xs">
+          <div *ngIf="password?.hasError('minlength')">
+            Password must be at least 6 characters long.
+          </div>
+          <div *ngIf="password?.hasError('strongPassword')">
+            Password must contain at least one uppercase letter, one number, and
+            one special character.
+          </div>
+        </div>
       </div>
 
       <!-- Confirm Password -->
@@ -61,7 +68,7 @@
         />
         <small
           *ngIf="confirmPassword?.invalid && confirmPassword?.touched"
-          class="error"
+          class="error flex flex-col"
         >
           <span *ngIf="confirmPassword?.errors?.['required']"
             >Confirm password is required.</span
@@ -74,6 +81,10 @@
 
       <!-- Submit Button -->
       <div class="form-group">
+        <div class="text-foreground self-end pb-3">
+          Already have an account?
+          <a class="cursor-pointer" (click)="goToLogin()">Login here</a>
+        </div>
         <button
           type="submit"
           [disabled]="isSubmitting || registerForm.invalid"

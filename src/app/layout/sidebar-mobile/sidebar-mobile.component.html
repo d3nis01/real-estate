@@ -1,0 +1,49 @@
+<div class="mobile-sidebar">
+  <div class="sidebar-underlay" (click)="closeSidebar()"></div>
+  <div class="sidebar-container">
+    <button
+      class="close-button"
+      (click)="closeSidebar()"
+      aria-label="Close Sidebar"
+    >
+      ✕
+    </button>
+    <div class="sidebar-elements-list">
+      <div
+        class="sidebar-element"
+        [ngClass]="{ 'active-sidebar-element': isActive('/create-user') }"
+        (click)="goToCreateUser()"
+      >
+        Create User
+      </div>
+      <div
+        class="sidebar-element"
+        [ngClass]="{ 'active-sidebar-element': isActive('/get-all-users') }"
+        (click)="goToGetAllUsers()"
+      >
+        All Users
+      </div>
+      <div
+        class="sidebar-element"
+        [ngClass]="{ 'active-sidebar-element': isActive('/create-listing') }"
+        (click)="goToCreateListing()"
+      >
+        Create Listing
+      </div>
+      <div
+        class="sidebar-element"
+        [ngClass]="{ 'active-sidebar-element': isActive('/get-all-listings') }"
+        (click)="goToGetAllListings()"
+      >
+        All Listings
+      </div>
+      <div
+        class="sidebar-element"
+        [ngClass]="{ 'active-sidebar-element': isActive('/price-prediction') }"
+        (click)="goToPredictionPage()"
+      >
+        Price Prediction
+      </div>
+    </div>
+  </div>
+</div>

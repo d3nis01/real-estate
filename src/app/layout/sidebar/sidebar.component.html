@@ -1,0 +1,39 @@
+<div class="sidebar-container">
+  <div class="sidebar-elements-list">
+    <div
+      class="sidebar-element"
+      [ngClass]="{ 'active-sidebar-element': isActive('/create-user') }"
+      (click)="goToCreateUser()"
+    >
+      Create User
+    </div>
+    <div
+      class="sidebar-element"
+      [ngClass]="{ 'active-sidebar-element': isActive('/get-all-users') }"
+      (click)="goToGetAllUsers()"
+    >
+      All Users
+    </div>
+    <div
+      class="sidebar-element"
+      [ngClass]="{ 'active-sidebar-element': isActive('/create-listing') }"
+      (click)="goToCreateListing()"
+    >
+      Create Listing
+    </div>
+    <div
+      class="sidebar-element"
+      [ngClass]="{ 'active-sidebar-element': isActive('/get-all-listings') }"
+      (click)="goToGetAllListings()"
+    >
+      All Listings
+    </div>
+    <div
+      class="sidebar-element"
+      [ngClass]="{ 'active-sidebar-element': isActive('/price-prediction') }"
+      (click)="goToPredictionPage()"
+    >
+      Price Prediction
+    </div>
+  </div>
+</div>

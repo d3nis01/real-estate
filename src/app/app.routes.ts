@@ -8,6 +8,7 @@ import { GetAllListingsComponent } from './components/listing-components/get-all
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './services/auth-service/auth.guard';
+import { PredictionPageComponent } from './components/prediction-page/prediction-page.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/get-all-users', pathMatch: 'full' },
@@ -23,4 +24,5 @@ export const routes: Routes = [
   { path: 'get-all-listings', component: GetAllListingsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'price-prediction', component: PredictionPageComponent },
 ];

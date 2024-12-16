@@ -2,14 +2,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100dvh;
+  height: 100%;
+  width: calc(100vw - 240px);
+  background-color: #f9f9f9;
+
+  @media (max-width: 992px) {
+    width: 100vw;
+  }
+
+  @media (max-width: 550px) {
+    height: max-content;
+  }
 }
 
 .create-listing {
+  width: 100%;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 12px;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -59,6 +70,10 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+
+  @media (max-width: 550px) {
+    flex-direction: column;
+  }
 }
 
 .form-group {

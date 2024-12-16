@@ -5,6 +5,7 @@ import {
   Validators,
   AbstractControl,
   ValidationErrors,
+  ValidatorFn,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -24,12 +25,23 @@ export class RegisterComponent {
   successMessage: string | null = null;
   errorMessage: string | null = null;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.registerForm = this.fb.group(
       {
         username: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            this.strongPasswordValidator(),
+          ],
+        ],
         confirmPassword: ['', [Validators.required]],
         city: ['', [Validators.required]],
       },
@@ -37,7 +49,23 @@ export class RegisterComponent {
     );
   }
 
-  // Custom validator for password confirmation
+  private strongPasswordValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const password = control.value?.trim();
+
+      if (!password) {
+        return null;
+      }
+
+      const strongPasswordPattern =
+        /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
+
+      const isValid = strongPasswordPattern.test(password);
+
+      return isValid ? null : { strongPassword: true };
+    };
+  }
+
   private passwordsMatchValidator(
     group: AbstractControl
   ): ValidationErrors | null {
@@ -46,7 +74,6 @@ export class RegisterComponent {
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
-  // Handle form submission
   onSubmit(): void {
     if (this.registerForm.invalid) {
       this.errorMessage =
@@ -61,10 +88,10 @@ export class RegisterComponent {
     const { username, email, password, city } = this.registerForm.value;
 
     this.authService.register({ username, email, password, city }).subscribe({
-      next: (response) => {
+      next: () => {
         this.isSubmitting = false;
         this.successMessage = 'Registration successful! Please log in.';
-         this.router.navigate(['/login']);
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         this.isSubmitting = false;
@@ -74,7 +101,6 @@ export class RegisterComponent {
     });
   }
 
-  // Getter for form controls (for easier access in the template)
   get username() {
     return this.registerForm.get('username');
   }
@@ -93,5 +119,9 @@ export class RegisterComponent {
 
   get city() {
     return this.registerForm.get('city');
+  }
+
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 }

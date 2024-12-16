@@ -1,0 +1,25 @@
+<header class="header-container">
+  <div class="header-left-side">
+    <!-- Menu Button (Visible under 992px) -->
+    <button
+      class="menu-button lg:hidden"
+      (click)="toggleSidebar()"
+      aria-label="Open Sidebar"
+    >
+      ☰
+    </button>
+    <div class="header-title">SmartEstate</div>
+  </div>
+  <div class="header-right-side">
+    <div class="header-buttons">
+      <button class="register-button" (click)="goToRegister()">Register</button>
+      <button class="login-button" (click)="goToLogin()">Login</button>
+    </div>
+  </div>
+</header>
+
+<!-- Sidebar -->
+<app-sidebar-mobile
+  *ngIf="isSidebarVisible"
+  (close)="closeSidebar()"
+></app-sidebar-mobile>

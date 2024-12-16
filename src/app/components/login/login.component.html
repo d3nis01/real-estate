@@ -1,6 +1,6 @@
 <div class="login-page">
-  <div class="login-container">
-    <h2>Login</h2>
+  <div class="login-container w-full max-w-[400px]">
+    <h2 class="text-xxl font-bold">Login</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <!-- Username -->
       <div class="form-group">
@@ -38,6 +38,10 @@
 
       <!-- Submit Button -->
       <div class="form-group">
+        <div class="text-foreground self-end pb-3">
+          You don't have an account yet?
+          <a class="cursor-pointer" (click)="goToRegister()">Register here</a>
+        </div>
         <button
           type="submit"
           [disabled]="loginForm.invalid"
