@@ -1,0 +1,37 @@
+<div class="cards-list-container">
+  <div class="card-list-header">
+    <div class="card-list-header-left">
+      <div class="card-list-header-title">Based on your location</div>
+      <div class="card-list-header-description">
+        Some of our picked properties near your location.
+      </div>
+    </div>
+    <button mat-flat-button (click)="goToCreateListing()">New listing</button>
+  </div>
+
+  <div class="card-grid">
+    <!-- Dynamically generate cards from API -->
+    <div class="card-container" *ngFor="let listing of listings">
+      <img
+        [src]="listing.image || 'assets/images/placeholder.png'"
+        alt="home"
+        class="card-image"
+      />
+      <div class="card-text-container">
+        <div class="card-price-wrapper">
+          <div class="card-price">${{ listing.budget | number : "1.0-0" }}</div>
+          <div class="card-budget">Budget</div>
+        </div>
+        <div class="card-details-container">
+          <div class="card-title">{{ listing.projectType }}</div>
+          <div class="card-description">
+            {{ listing.title }} - {{ listing.city }}, {{ listing.country }}
+          </div>
+        </div>
+        <button mat-flat-button (click)="viewDetails(listing.id)">
+          View Details
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

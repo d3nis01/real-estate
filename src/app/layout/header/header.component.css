@@ -21,7 +21,8 @@
 .header-details-container {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 6px;
 }
 
 .header-logo {
@@ -31,8 +32,8 @@
 }
 
 .header-title {
-  font-size: 24px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: 800;
 
   @media (max-width: 450px) {
     font-size: 20px;
@@ -91,18 +92,12 @@
 
 .menu-button {
   display: none;
-  background-color: #2a2a2a;
-  color: white;
-  padding: 8px 12px;
+  color: #2a2a2a;
+  padding: 8px 8px;
   font-size: 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 50%;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.menu-button:hover {
-  background-color: #3b3b3b;
 }
 
 @media (max-width: 992px) {
@@ -143,4 +138,35 @@ span {
   font-size: 12px;
   text-align: left;
   font-weight: 500;
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-center-element {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hide elements above 992px */
+.lg\:hidden {
+  display: none;
+}
+
+/* Show elements above 992px */
+.lg\:flex {
+  display: flex;
+}
+
+@media (max-width: 992px) {
+  .lg\:hidden {
+    display: block;
+  }
+  .lg\:flex {
+    display: none;
+  }
 }

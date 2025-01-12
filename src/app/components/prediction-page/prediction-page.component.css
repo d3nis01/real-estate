@@ -13,13 +13,14 @@
   }
 }
 
-.preditiction-container {
+.prediction-container {
   padding: 20px;
   border: 1px solid #ddd;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
+  width: 100%;
+  max-width: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -31,4 +32,11 @@
   flex-direction: column;
   gap: 12px;
   font-size: 14px;
+  width: 100%;
+}
+
+.mat-snack-bar-container {
+  background-color: #d32f2f; /* Red background for errors */
+  color: #ffffff; /* White text */
+  font-weight: bold;
 }

@@ -1,27 +1,43 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth-service/auth.service';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../../services/auth-service/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSnackBarModule,
+  ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   loginForm: FormGroup;
   isSubmitting = false;
-  successMessage: string | null = null;
-  errorMessage: string | null = null;
+  username: any;
+  password: any;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
@@ -31,38 +47,34 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.loginForm.invalid) {
-      this.errorMessage = 'Please fill out all required fields.';
+      this.showSnackbar('Please fill out all required fields.', 'error');
       return;
     }
 
     this.isSubmitting = true;
-    this.successMessage = null;
-    this.errorMessage = null;
-
     const { username, password } = this.loginForm.value;
 
     this.authService.login({ username, password }).subscribe({
       next: () => {
         this.isSubmitting = false;
-        this.successMessage = 'Login successful!';
+        this.showSnackbar('Login successful!', 'success');
         this.router.navigate(['/']);
       },
-      error: (err) => {
+      error: () => {
         this.isSubmitting = false;
-        this.errorMessage = err.error?.message || 'Invalid login credentials.';
+        this.showSnackbar('Invalid login credentials.', 'error');
       },
     });
   }
 
-  get username() {
-    return this.loginForm.get('username');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
-  }
-
-  goToRegister() {
+  goToRegister(): void {
     this.router.navigate(['/register']);
+  }
+
+  private showSnackbar(message: string, panelClass: string): void {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+      panelClass: [panelClass],
+    });
   }
 }

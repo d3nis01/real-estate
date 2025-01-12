@@ -32,22 +32,22 @@ export class GetAllListingsComponent implements OnInit {
     });
   }
 
-  // Fetch listings filtered by date (ascending)
-  filterByDate(): void {
-    this.listingService.getAllListingsByDateAscending().subscribe((data) => {
-      this.listings = data; // Update listings with filtered data
-      console.log(this.listings);
-      this.reinitializePagination(); // Reset pagination
-    });
-  }
+  // // Fetch listings filtered by date (ascending)
+  // filterByDate(): void {
+  //   this.listingService.getAllListingsByDateAscending().subscribe((data) => {
+  //     this.listings = data; // Update listings with filtered data
+  //     console.log(this.listings);
+  //     this.reinitializePagination(); // Reset pagination
+  //   });
+  // }
 
-  // Fetch listings filtered by budget (ascending)
-  filterByBudget(): void {
-    this.listingService.getAllListingsByBudgetAscending().subscribe((data) => {
-      this.listings = data; // Update listings with filtered data
-      this.reinitializePagination(); // Reset pagination
-    });
-  }
+  // // Fetch listings filtered by budget (ascending)
+  // filterByBudget(): void {
+  //   this.listingService.getAllListingsByBudgetAscending().subscribe((data) => {
+  //     this.listings = data; // Update listings with filtered data
+  //     this.reinitializePagination(); // Reset pagination
+  //   });
+  // }
 
   // Reinitialize pagination
   reinitializePagination(): void {

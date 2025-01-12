@@ -1,55 +1,54 @@
 <div class="login-page">
-  <div class="login-container w-full max-w-[400px]">
-    <h2 class="text-xxl font-bold">Login</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="login-container">
+    <h2>Login</h2>
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="onSubmit()"
+      class="flex flex-col items-center w-full"
+    >
       <!-- Username -->
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input id="username" formControlName="username" type="text" />
-        <small
-          *ngIf="
-            loginForm.get('username')?.invalid &&
-            loginForm.get('username')?.touched
-          "
-          class="error"
-        >
-          <span *ngIf="loginForm.get('username')?.errors?.['required']"
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username" />
+        <mat-error *ngIf="username?.invalid && username?.touched">
+          <span *ngIf="username?.errors?.['required']"
             >Username is required.</span
           >
-        </small>
-      </div>
+          <span *ngIf="username?.errors?.['minlength']">
+            Username must be at least 3 characters long.
+          </span>
+        </mat-error>
+      </mat-form-field>
 
       <!-- Password -->
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input id="password" formControlName="password" type="password" />
-        <small
-          *ngIf="
-            loginForm.get('password')?.invalid &&
-            loginForm.get('password')?.touched
-          "
-          class="error"
-        >
-          <span *ngIf="loginForm.get('password')?.errors?.['required']"
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" type="password" />
+        <mat-error *ngIf="password?.invalid && password?.touched">
+          <span *ngIf="password?.errors?.['required']"
             >Password is required.</span
           >
-        </small>
+          <span *ngIf="password?.errors?.['minlength']">
+            Password must be at least 6 characters long.
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Register Link -->
+      <div class="register-link self-end">
+        Don't have an account?
+        <a class="cursor-pointer" (click)="goToRegister()">Register here</a>
       </div>
 
       <!-- Submit Button -->
-      <div class="form-group">
-        <div class="text-foreground self-end pb-3">
-          You don't have an account yet?
-          <a class="cursor-pointer" (click)="goToRegister()">Register here</a>
-        </div>
-        <button
-          type="submit"
-          [disabled]="loginForm.invalid"
-          class="login-button"
-        >
-          Login
-        </button>
-      </div>
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        [disabled]="loginForm.invalid"
+      >
+        Login
+      </button>
     </form>
   </div>
 </div>

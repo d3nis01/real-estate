@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Company Details</h2>
+<mat-dialog-content>
+  <p><strong>Company Name:</strong> {{ company.name }}</p>
+  <p><strong>Email:</strong> {{ company.email }}</p>
+  <p><strong>Phone Number:</strong> {{ company.phoneNumber }}</p>
+  <p><strong>City:</strong> {{ company.city }}</p>
+  <p><strong>Country:</strong> {{ company.country }}</p>
+  <p><strong>Description:</strong> {{ company.description }}</p>
+  <p>
+    <strong>Profile Picture:</strong>
+    <a [href]="company.profilePicture" target="_blank" rel="noopener">
+      {{ company.profilePicture }}
+    </a>
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">Close</button>
+</mat-dialog-actions>

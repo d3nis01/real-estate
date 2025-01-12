@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthService {
   private baseUrl = environment.apiUrl + '/Auth';
+  private currentUserUrl = environment.apiUrl + '/Users/me';
   private currentUserSubject = new BehaviorSubject<any>(null);
 
   constructor(private http: HttpClient) {
@@ -44,7 +45,9 @@ export class AuthService {
 
   private checkAuthStatus(): void {
     this.http
-      .get<{ userId: string }>(`${this.baseUrl}/me`, { withCredentials: true })
+      .get<{ userId: string }>(`${this.currentUserUrl}`, {
+        withCredentials: true,
+      })
       .subscribe({
         next: (response) => {
           this.currentUserSubject.next(

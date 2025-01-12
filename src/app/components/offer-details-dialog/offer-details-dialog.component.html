@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Offer Details</h2>
+<mat-dialog-content>
+  <p><strong>Company Name:</strong> {{ this.companyName }}</p>
+  <p><strong>Deadline:</strong> {{ offer.deadline | date : "longDate" }}</p>
+  <p><strong>Price:</strong> {{ offer.price | currency }}</p>
+  <p><strong>Description:</strong> {{ offer.description }}</p>
+  <p>
+    <strong>Offer Document:</strong>
+    <a [href]="offer.offerDocument" target="_blank" rel="noopener">
+      {{ offer.offerDocument }}
+    </a>
+  </p>
+  <p><strong>Status:</strong> {{ offer.status }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="closeDialog()">Close</button>
+  <button
+    mat-raised-button
+    color="warn"
+    (click)="deleteOffer()"
+    [disabled]="isDeleting"
+  >
+    {{ isDeleting ? "Deleting..." : "Delete Offer" }}
+  </button>
+</mat-dialog-actions>

@@ -1,12 +1,29 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { PredictionService } from '../../services/prediction-service/prediction.service';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-prediction-page',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatSnackBarModule, // Add Snackbar Module
+  ],
   templateUrl: './prediction-page.component.html',
   styleUrls: ['./prediction-page.component.css'],
 })
@@ -15,9 +32,11 @@ export class PredictionPageComponent {
   countrycode: string = 'RO';
   date: string = '';
   predictionResult: string | null = null;
-  error: string | null = null;
 
-  constructor(private predictionService: PredictionService) {}
+  constructor(
+    private predictionService: PredictionService,
+    private snackBar: MatSnackBar // Inject MatSnackBar
+  ) {}
 
   private formatDate(date: string): string {
     const inputDate = new Date(date);
@@ -29,12 +48,9 @@ export class PredictionPageComponent {
 
   onSubmit(): void {
     if (!this.country || !this.countrycode || !this.date) {
-      this.error = 'Please fill in all fields.';
-      this.predictionResult = null;
+      this.openSnackBar('Please fill in all fields.', 'Close'); // Show snackbar
       return;
     }
-
-    this.error = null;
 
     const requestData = {
       date: this.formatDate(this.date),
@@ -49,7 +65,10 @@ export class PredictionPageComponent {
         } is ${result.toFixed(2)}% compared to the previous year.`;
       },
       error: (err) => {
-        this.error = 'An error occurred while fetching the prediction.';
+        this.openSnackBar(
+          'An error occurred while fetching the prediction.',
+          'Close'
+        ); // Show snackbar on error
         console.error(err);
       },
     });
@@ -60,6 +79,13 @@ export class PredictionPageComponent {
     this.countrycode = '';
     this.date = '';
     this.predictionResult = null;
-    this.error = null;
+  }
+
+  private openSnackBar(message: string, action: string): void {
+    this.snackBar.open(message, action, {
+      duration: 3000, // Snackbar duration in milliseconds
+      verticalPosition: 'bottom', // Position at the top
+      horizontalPosition: 'center', // Center horizontally
+    });
   }
 }

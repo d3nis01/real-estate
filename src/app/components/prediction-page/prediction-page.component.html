@@ -1,51 +1,56 @@
-<div class="prediction-page flex flex-col items-center py-8">
-  <div
-    class="prediction-container w-full max-w-[600px] bg-white shadow-lg rounded-lg p-6"
-  >
+<div class="prediction-page">
+  <div class="prediction-container">
     <h1 class="text-xl font-semibold mb-4">Prediction Form</h1>
 
-    <form (ngSubmit)="onSubmit()" class="space-y-4">
-      <div class="form-group">
-        <label for="country" class="block font-medium text-gray-700 mb-1"
-          >Country</label
-        >
+    <form (ngSubmit)="onSubmit()" class="space-y-4 w-full">
+      <!-- Country Input -->
+      <mat-form-field appearance="fill" class="form-group">
+        <mat-label>Country</mat-label>
         <input
+          matInput
           type="text"
-          id="country"
-          class="form-control w-full px-4 py-2 border border-gray-300 rounded-md"
           [(ngModel)]="country"
           name="country"
           required
         />
-      </div>
+        <mat-error *ngIf="!country">Country is required.</mat-error>
+      </mat-form-field>
 
-      <div class="form-group">
-        <label for="date" class="block font-medium text-gray-700 mb-1"
-          >Date</label
-        >
+      <!-- Date Picker Input -->
+      <mat-form-field appearance="fill" class="form-group">
+        <mat-label>Date</mat-label>
         <input
-          type="date"
-          id="date"
-          class="form-control w-full px-4 py-2 border border-gray-300 rounded-md"
+          matInput
+          [matDatepicker]="picker"
           [(ngModel)]="date"
           name="date"
           required
         />
-      </div>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="!date">Date is required.</mat-error>
+      </mat-form-field>
 
-      <div *ngIf="error" class="text-destructive">{{ error }}</div>
+      <!-- Error Message -->
+      <!-- <div *ngIf="error" class="text-destructive">{{ error }}</div> -->
 
       <div class="flex justify-between items-center mt-4">
         <button
+          mat-raised-button
+          color="primary"
           type="submit"
-          class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+          [disabled]="!country || !date"
         >
           Submit
         </button>
         <button
+          mat-raised-button
+          color="accent"
           type="button"
           (click)="clearForm()"
-          class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition"
         >
           Clear
         </button>
@@ -53,10 +58,8 @@
     </form>
   </div>
 
-  <div
-    *ngIf="predictionResult"
-    class="prediction-container w-full max-w-[600px] bg-white shadow-lg rounded-lg p-6"
-  >
+  <!-- Prediction Result -->
+  <div *ngIf="predictionResult" class="prediction-container">
     <h1 class="text-xl font-semibold justify-center flex w-full mb-4">
       Prediction Result
     </h1>

@@ -7,28 +7,44 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth-service/auth.service';
 import { Router } from '@angular/router';
-
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth-service/auth.service';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatSnackBarModule,
+  ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
   registerForm: FormGroup;
   isSubmitting = false;
-  successMessage: string | null = null;
-  errorMessage: string | null = null;
+  username: any;
+  email: any;
+  city: any;
+  password: any;
+  confirmPassword: any;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.registerForm = this.fb.group(
       {
@@ -60,9 +76,9 @@ export class RegisterComponent {
       const strongPasswordPattern =
         /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
 
-      const isValid = strongPasswordPattern.test(password);
-
-      return isValid ? null : { strongPassword: true };
+      return strongPasswordPattern.test(password)
+        ? null
+        : { strongPassword: true };
     };
   }
 
@@ -76,52 +92,37 @@ export class RegisterComponent {
 
   onSubmit(): void {
     if (this.registerForm.invalid) {
-      this.errorMessage =
-        'Please fix the errors in the form before submitting.';
+      this.snackBar.open('Please fix the errors in the form.', 'Close', {
+        duration: 3000,
+        panelClass: 'error-snackbar',
+      });
       return;
     }
 
     this.isSubmitting = true;
-    this.successMessage = null;
-    this.errorMessage = null;
 
     const { username, email, password, city } = this.registerForm.value;
 
     this.authService.register({ username, email, password, city }).subscribe({
       next: () => {
         this.isSubmitting = false;
-        this.successMessage = 'Registration successful! Please log in.';
+        this.snackBar.open('Registration successful! Please log in.', 'Close', {
+          duration: 3000,
+          panelClass: 'success-snackbar',
+        });
         this.router.navigate(['/login']);
       },
-      error: (err) => {
+      error: () => {
         this.isSubmitting = false;
-        this.errorMessage =
-          err.error?.message || 'Registration failed. Please try again.';
+        this.snackBar.open('Registration failed. Please try again.', 'Close', {
+          duration: 3000,
+          panelClass: 'error-snackbar',
+        });
       },
     });
   }
 
-  get username() {
-    return this.registerForm.get('username');
-  }
-
-  get email() {
-    return this.registerForm.get('email');
-  }
-
-  get password() {
-    return this.registerForm.get('password');
-  }
-
-  get confirmPassword() {
-    return this.registerForm.get('confirmPassword');
-  }
-
-  get city() {
-    return this.registerForm.get('city');
-  }
-
-  goToLogin() {
+  goToLogin(): void {
     this.router.navigate(['/login']);
   }
 }

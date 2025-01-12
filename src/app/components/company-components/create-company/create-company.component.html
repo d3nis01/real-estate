@@ -3,175 +3,146 @@
     <div class="nav-bar">
       <ul>
         <li>
-          <a (click)="goToAllCompanies()" routerLink="/get-all-companies">
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="goToAllCompanies()"
+          >
             Back to Companies List
-          </a>
+          </button>
         </li>
       </ul>
     </div>
 
-    <h2 class="text-xxl font-bold">Create Company</h2>
-
-    <form
-      [formGroup]="companyForm"
-      (ngSubmit)="onSubmit()"
-      class="form-container"
-    >
-      <div class="fields-wrapper">
-        <!-- Name -->
-        <div class="form-group">
-          <label for="name">Company Name</label>
-          <input id="name" formControlName="name" type="text" />
-          <small
-            *ngIf="
-              companyForm.get('name')?.invalid &&
-              companyForm.get('name')?.touched
-            "
-            class="error"
-          >
-            <span *ngIf="companyForm.get('name')?.errors?.['required']">
-              Company name is required.
-            </span>
-            <span *ngIf="companyForm.get('name')?.errors?.['minlength']">
-              Company name must be at least 3 characters long.
-            </span>
-            <span *ngIf="companyForm.get('name')?.errors?.['maxlength']">
-              Company name must not exceed 100 characters.
-            </span>
-          </small>
-        </div>
-
-        <!-- Email -->
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input id="email" formControlName="email" type="email" />
-          <small
-            *ngIf="
-              companyForm.get('email')?.invalid &&
-              companyForm.get('email')?.touched
-            "
-            class="error"
-          >
-            <span *ngIf="companyForm.get('email')?.errors?.['required']">
-              Email is required.
-            </span>
-            <span *ngIf="companyForm.get('email')?.errors?.['email']">
-              Invalid email format.
-            </span>
-          </small>
-        </div>
-
-        <!-- Phone Number -->
-        <div class="form-group">
-          <label for="phoneNumber">Phone Number</label>
-          <input id="phoneNumber" formControlName="phoneNumber" type="text" />
-          <small
-            *ngIf="
-              companyForm.get('phoneNumber')?.invalid &&
-              companyForm.get('phoneNumber')?.touched
-            "
-            class="error"
-          >
-            <span *ngIf="companyForm.get('phoneNumber')?.errors?.['required']">
-              Phone number is required.
-            </span>
-            <span *ngIf="companyForm.get('phoneNumber')?.errors?.['pattern']">
-              Phone number must be between 7 and 15 digits.
-            </span>
-          </small>
-        </div>
-
-        <!-- City -->
-        <div class="form-group">
-          <label for="city">City</label>
-          <input id="city" formControlName="city" type="text" />
-          <small
-            *ngIf="
-              companyForm.get('city')?.invalid &&
-              companyForm.get('city')?.touched
-            "
-            class="error"
-          >
-            <span *ngIf="companyForm.get('city')?.errors?.['required']">
-              City is required.
-            </span>
-            <span *ngIf="companyForm.get('city')?.errors?.['maxlength']">
-              City must not exceed 100 characters.
-            </span>
-          </small>
-        </div>
-
-        <!-- Country -->
-        <div class="form-group">
-          <label for="country">Country</label>
-          <input id="country" formControlName="country" type="text" />
-          <small
-            *ngIf="
-              companyForm.get('country')?.invalid &&
-              companyForm.get('country')?.touched
-            "
-            class="error"
-          >
-            <span *ngIf="companyForm.get('country')?.errors?.['required']">
-              Country is required.
-            </span>
-            <span *ngIf="companyForm.get('country')?.errors?.['maxlength']">
-              Country must not exceed 100 characters.
-            </span>
-          </small>
-        </div>
-
-        <!-- Description -->
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea id="description" formControlName="description"></textarea>
-          <small
-            *ngIf="
-              companyForm.get('description')?.invalid &&
-              companyForm.get('description')?.touched
-            "
-            class="error"
-          >
-            <span *ngIf="companyForm.get('description')?.errors?.['maxlength']">
-              Description must not exceed 500 characters.
-            </span>
-          </small>
-        </div>
-
-        <!-- Profile Picture -->
-        <div class="form-group">
-          <label for="profilePicture">Profile Picture URL</label>
-          <input
-            id="profilePicture"
-            formControlName="profilePicture"
-            type="text"
-          />
-          <small
-            *ngIf="
-              companyForm.get('profilePicture')?.invalid &&
-              companyForm.get('profilePicture')?.touched
-            "
-            class="error"
-          >
-            <span
-              *ngIf="companyForm.get('profilePicture')?.errors?.['maxlength']"
-            >
-              Profile picture URL must not exceed 2048 characters.
-            </span>
-          </small>
-        </div>
+    <ng-container *ngIf="existingCompany; else createForm">
+      <h2>Your Company Details</h2>
+      <div class="company-details">
+        <p><strong>Name:</strong> {{ existingCompany.name }}</p>
+        <p><strong>Email:</strong> {{ existingCompany.email }}</p>
+        <p><strong>Phone:</strong> {{ existingCompany.phoneNumber }}</p>
+        <p><strong>City:</strong> {{ existingCompany.city }}</p>
+        <p><strong>Country:</strong> {{ existingCompany.country }}</p>
+        <p><strong>Description:</strong> {{ existingCompany.description }}</p>
+        <img
+          *ngIf="existingCompany.profilePicture"
+          [src]="existingCompany.profilePicture"
+          alt="Company Profile Picture"
+        />
       </div>
+    </ng-container>
 
-      <!-- Buttons -->
-      <div class="buttons-wrapper">
-        <button
-          class="btn-submit"
-          type="submit"
-          [disabled]="companyForm.invalid || isSubmitting"
-        >
-          {{ isSubmitting ? "Creating..." : "Create Company" }}
-        </button>
-      </div>
-    </form>
+    <ng-template #createForm>
+      <h2>Create Company</h2>
+      <form
+        [formGroup]="companyForm"
+        (ngSubmit)="onSubmit()"
+        class="form-container"
+      >
+        <div class="fields-wrapper">
+          <!-- Column 1 -->
+          <div class="form-group">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Company Name</mat-label>
+              <input matInput formControlName="name" />
+              <mat-error *ngIf="companyForm.get('name')?.errors?.['required']">
+                Company name is required.
+              </mat-error>
+              <mat-error *ngIf="companyForm.get('name')?.errors?.['minlength']">
+                Must be at least 3 characters.
+              </mat-error>
+              <mat-error *ngIf="companyForm.get('name')?.errors?.['maxlength']">
+                Must not exceed 100 characters.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>City</mat-label>
+              <input matInput formControlName="city" />
+              <mat-error *ngIf="companyForm.get('city')?.errors?.['required']">
+                City is required.
+              </mat-error>
+              <mat-error *ngIf="companyForm.get('city')?.errors?.['maxlength']">
+                Must not exceed 100 characters.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Description</mat-label>
+              <textarea matInput formControlName="description"></textarea>
+              <mat-error
+                *ngIf="companyForm.get('description')?.errors?.['maxlength']"
+              >
+                Must not exceed 500 characters.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Column 2 -->
+          <div class="form-group">
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Email</mat-label>
+              <input matInput type="email" formControlName="email" />
+              <mat-error *ngIf="companyForm.get('email')?.errors?.['required']">
+                Email is required.
+              </mat-error>
+              <mat-error *ngIf="companyForm.get('email')?.errors?.['email']">
+                Invalid email format.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Country</mat-label>
+              <input matInput formControlName="country" />
+              <mat-error
+                *ngIf="companyForm.get('country')?.errors?.['required']"
+              >
+                Country is required.
+              </mat-error>
+              <mat-error
+                *ngIf="companyForm.get('country')?.errors?.['maxlength']"
+              >
+                Must not exceed 100 characters.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="full-width">
+              <mat-label>Phone Number</mat-label>
+              <input matInput formControlName="phoneNumber" />
+              <mat-error
+                *ngIf="companyForm.get('phoneNumber')?.errors?.['required']"
+              >
+                Phone number is required.
+              </mat-error>
+              <mat-error
+                *ngIf="companyForm.get('phoneNumber')?.errors?.['pattern']"
+              >
+                Must be 7-15 digits.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>Profile Picture URL</mat-label>
+          <input matInput formControlName="profilePicture" />
+          <mat-error
+            *ngIf="companyForm.get('profilePicture')?.errors?.['maxlength']"
+          >
+            Must not exceed 2048 characters.
+          </mat-error>
+        </mat-form-field>
+
+        <div class="buttons-wrapper">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            [disabled]="companyForm.invalid || isSubmitting"
+          >
+            {{ isSubmitting ? "Creating..." : "Create Company" }}
+          </button>
+        </div>
+      </form>
+    </ng-template>
   </div>
 </div>

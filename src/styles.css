@@ -65,7 +65,7 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  /* outline: 4px auto -webkit-focus-ring-color; */
 }
 
 @media (prefers-color-scheme: light) {
@@ -151,4 +151,13 @@ select {
   color: #2a2a2a;
   border: 1px solid #e5e7eb;
   transition: border-color 0.25s;
+}
+
+html,
+body {
+  /* height: 100%; */
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

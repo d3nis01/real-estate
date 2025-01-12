@@ -4,6 +4,7 @@
   align-items: center;
   height: 100%;
   width: calc(100vw - 240px);
+  min-height: calc(100vh - 64px);
   background-color: #f9f9f9;
 
   @media (max-width: 992px) {
@@ -19,13 +20,26 @@
   margin: 12px;
   background: #fff;
   border: 1px solid #ddd;
+  max-width: 400px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 400px) {
+    margin: 6px;
+    padding: 10px;
+  }
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 20px;
+  color: #333;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 10px;
+
+  @media (max-width: 400px) {
+    font-size: 24px;
+  }
 }
 
 .form-group {
@@ -40,10 +54,7 @@ label {
 }
 
 input {
-  padding: 10px;
   font-size: 14px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
 }
 
 input:focus {
@@ -71,4 +82,36 @@ input:focus {
 .register-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.form-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.link-text {
+  text-align: center;
+  margin-top: 15px;
+}
+
+mat-card {
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+mat-error {
+  font-size: 12px;
+}
+
+.success-snackbar {
+  background-color: #4caf50;
+}
+
+.error-snackbar {
+  background-color: #f44336;
 }

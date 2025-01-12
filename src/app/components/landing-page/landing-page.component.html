@@ -1,0 +1,72 @@
+<div class="landing-page-container">
+  <!-- the new way to build a home -->
+  <div
+    class="flex flex-col md:flex-row justify-between items-center w-full xs:w-3/4 md:w-full max-w-[900px] md:min-h-[500px] border rounded-md border-border bg-background"
+  >
+    <!-- left col -->
+    <div
+      class="w-full md:w-1/2 flex flex-col items-center p-4 pt-6 md:p-8 gap-8"
+    >
+      <!-- title and description -->
+      <div class="flex flex-col md:pr-8 gap-2">
+        <div class="text-[30px] xs:text-[40px] text-primary leading-9">
+          The new way to build your new home
+        </div>
+        <div class="text-md text-foreground">
+          Build your dream place to live in with more than 10k+ properties built
+          listed.
+        </div>
+      </div>
+
+      <!-- details -->
+      <div class="w-full flex justify-between items-start gap-2">
+        <div class="lp-detail-container">
+          <img
+            class="lp-detail-image"
+            [src]="'assets/images/landing-page/icon1.png'"
+          />
+          <div class="lp-detail-text-container">
+            <div class="text-xxl text-primary font-bold">7.4%</div>
+            <div class="text-xs text-foreground text-center">
+              Property Return Rate
+            </div>
+          </div>
+        </div>
+        <div class="lp-detail-container">
+          <img
+            class="lp-detail-image"
+            [src]="'assets/images/landing-page/icon2.png'"
+          />
+          <div class="lp-detail-text-container">
+            <div class="text-xxl text-primary font-bold">3,846</div>
+            <div class="text-xs text-foreground text-center">
+              Properties built
+            </div>
+          </div>
+        </div>
+        <div class="lp-detail-container">
+          <img
+            class="lp-detail-image"
+            [src]="'assets/images/landing-page/icon3.png'"
+          />
+          <div class="lp-detail-text-container">
+            <div class="text-xxl text-primary font-bold">2,546</div>
+            <div class="text-xs text-foreground text-center">
+              Daily Completed
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- right col -->
+    <div class="w-full max-h-[400px] md:w-1/2">
+      <!-- image -->
+      <img
+        [src]="'assets/images/house.png'"
+        alt="home"
+        class="w-full h-full object-cover object-top"
+      />
+    </div>
+  </div>
+</div>

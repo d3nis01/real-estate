@@ -1,1 +1,69 @@
-<p>get-all-offers works!</p>
+<div class="getalloffers-container">
+  <div class="w-full flex justify-between items-center pt-3">
+    <div class="text-lg xs:text-xl md:text-[32px] font-bold">
+      All offers for {{ listingName }}
+    </div>
+    <div class="hidden xs:flex">
+      <button mat-flat-button color="primary" (click)="goBackToListing()">
+        Back to listing
+      </button>
+    </div>
+  </div>
+  <table mat-table [dataSource]="offers" class="mat-elevation-z8" matSort>
+    <!-- Company Name Column -->
+    <ng-container matColumnDef="companyName">
+      <th mat-header-cell *matHeaderCellDef class="no-wrap" mat-sort-header>
+        Company
+      </th>
+      <td mat-cell *matCellDef="let offer" class="no-wrap">
+        {{ offer.companyName }}
+      </td>
+    </ng-container>
+
+    <!-- Deadline Column -->
+    <ng-container matColumnDef="deadline">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Deadline</th>
+      <td mat-cell *matCellDef="let offer">
+        {{ offer.deadline | date : "longDate" }}
+      </td>
+    </ng-container>
+
+    <!-- Price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="no-wrap">
+        Price
+      </th>
+      <td mat-cell *matCellDef="let offer" class="no-wrap">
+        {{ offer.price | currency }}
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let offer">
+        <button
+          mat-raised-button
+          color="accent"
+          (click)="openOfferDetails(offer.id)"
+        >
+          Details
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <!-- Material Paginator -->
+  <mat-paginator
+    [length]="totalCount"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+</div>
