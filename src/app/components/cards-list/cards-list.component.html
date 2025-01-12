@@ -34,4 +34,14 @@
       </div>
     </div>
   </div>
+
+  <!-- Add paginator -->
+  <mat-paginator
+    [length]="totalItems"
+    [pageSize]="pageSize"
+    [pageIndex]="currentPage"
+    [pageSizeOptions]="[5, 10, 25, 50]"
+    (page)="onPageChange($event)"
+    aria-label="Select page"
+  ></mat-paginator>
 </div>

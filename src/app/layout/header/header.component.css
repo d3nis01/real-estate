@@ -38,6 +38,7 @@
   @media (max-width: 450px) {
     font-size: 20px;
     font-weight: 650;
+    display: none;
   }
 
   @media (max-width: 340px) {
@@ -108,7 +109,7 @@
   }
 
   .header-left-side {
-    gap: 8px;
+    gap: 4px;
   }
 }
 

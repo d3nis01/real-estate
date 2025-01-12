@@ -11,14 +11,12 @@
     </button>
     <mat-menu #mobileMenu="matMenu">
       <!-- Include dynamic menu options -->
-      <button mat-menu-item (click)="goToHome()">Home</button>
       <button mat-menu-item (click)="goToLandingPage()">Landing Page</button>
       <button mat-menu-item (click)="goToCards()">Cards</button>
       <button mat-menu-item (click)="goToPredictPrice()">Predict Price</button>
       <button mat-menu-item [matMenuTriggerFor]="companiesMenu">
         Companies
       </button>
-      <button mat-menu-item [matMenuTriggerFor]="offersMenu">Offers</button>
       <button mat-menu-item [matMenuTriggerFor]="listingsMenu">Listings</button>
     </mat-menu>
 
@@ -63,14 +61,9 @@
   <!-- Rest of the Header -->
   <div class="header-center lg:flex hidden">
     <!-- Full menu options (Visible only when screen width is >= 992px) -->
-    <div class="header-center-element">
-      <button mat-button (click)="goToHome()">Home</button>
-    </div>
+
     <div class="header-center-element">
       <button mat-button (click)="goToLandingPage()">Landing Page</button>
-    </div>
-    <div class="header-center-element">
-      <button mat-button (click)="goToCards()">Cards</button>
     </div>
     <div class="header-center-element">
       <button mat-button (click)="goToPredictPrice()">Predict Price</button>
@@ -82,15 +75,7 @@
         View all companies
       </button>
     </mat-menu>
-    <button mat-button [matMenuTriggerFor]="offersMenu">Offers</button>
-    <mat-menu #offersMenu="matMenu">
-      <button mat-menu-item (click)="goToCreateOffer()">
-        Create a new offer
-      </button>
-      <button mat-menu-item (click)="goToGetAllOffers()">
-        View all offers
-      </button>
-    </mat-menu>
+
     <button mat-button [matMenuTriggerFor]="listingsMenu">Listings</button>
     <mat-menu #listingsMenu="matMenu">
       <button mat-menu-item (click)="goToCreateListing()">

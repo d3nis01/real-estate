@@ -1,6 +1,6 @@
 <div class="prediction-page">
   <div class="prediction-container">
-    <h1 class="text-xl font-semibold mb-4">Prediction Form</h1>
+    <div class="prediction-title">Prediction Form</div>
 
     <form (ngSubmit)="onSubmit()" class="space-y-4 w-full">
       <!-- Country Input -->
@@ -60,9 +60,7 @@
 
   <!-- Prediction Result -->
   <div *ngIf="predictionResult" class="prediction-container">
-    <h1 class="text-xl font-semibold justify-center flex w-full mb-4">
-      Prediction Result
-    </h1>
+    <div class="prediction-title">Prediction result</div>
     <div class="flex flex-col items-left">
       <p class="text-lg font-semibold mb-2">Predicted Growth</p>
       <p class="text-md font-bold text-foreground">{{ predictionResult }}</p>

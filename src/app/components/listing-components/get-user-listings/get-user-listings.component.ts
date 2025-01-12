@@ -5,6 +5,8 @@ import { ListingService } from '../../../services/listing-service/listing.servic
 import { AuthService } from '../../../services/auth-service/auth.service'; // Import AuthService
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-get-user-listings',
@@ -15,6 +17,9 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class GetUserListingsComponent implements OnInit {
   listings: Listing[] = [];
+  totalItems = 0; // Total number of listings
+  pageSize = 10; // Number of items per page
+  currentPage = 0; // Current page index
 
   constructor(
     private listingService: ListingService,
@@ -55,6 +60,16 @@ export class GetUserListingsComponent implements OnInit {
         console.error('Failed to fetch user listings:', err);
       },
     });
+  }
+
+  /**
+   * Handle page change events from the paginator
+   * @param event PageEvent
+   */
+  onPageChange(event: PageEvent): void {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.fetchCurrentUserListings();
   }
 
   /**

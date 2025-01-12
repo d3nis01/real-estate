@@ -81,14 +81,6 @@
               Must not exceed 500 characters.
             </mat-error>
           </mat-form-field>
-
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>Company ID</mat-label>
-            <input matInput formControlName="companyId" />
-            <mat-error *ngIf="offerForm.get('companyId')?.errors?.['required']">
-              Company ID is required.
-            </mat-error>
-          </mat-form-field>
         </div>
       </div>
 
