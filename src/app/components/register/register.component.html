@@ -2,7 +2,6 @@
   <mat-card class="register-container">
     <h2 class="mat-title">Register</h2>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <!-- Username -->
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Username</mat-label>
         <input matInput formControlName="username" />
@@ -16,7 +15,6 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- Email -->
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Email</mat-label>
         <input matInput type="email" formControlName="email" />
@@ -28,7 +26,6 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- Phone Number -->
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Phone Number</mat-label>
         <input matInput formControlName="phoneNumber" />
@@ -42,7 +39,6 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- Password -->
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Password</mat-label>
         <input matInput type="password" formControlName="password" />
@@ -60,7 +56,6 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- Confirm Password -->
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Confirm Password</mat-label>
         <input matInput type="password" formControlName="confirmPassword" />
@@ -76,7 +71,6 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- City -->
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>City</mat-label>
         <input matInput formControlName="city" />
@@ -85,7 +79,6 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- Submit Button -->
       <div class="button-container">
         <button
           mat-flat-button

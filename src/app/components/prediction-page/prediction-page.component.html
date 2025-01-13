@@ -12,7 +12,6 @@
     </div>
 
     <form (ngSubmit)="onSubmit()" class="space-y-4 w-full">
-      <!-- Country Input -->
       <mat-form-field appearance="fill" class="form-group">
         <mat-label>Country</mat-label>
         <input
@@ -25,7 +24,6 @@
         <mat-error *ngIf="!country">Country is required.</mat-error>
       </mat-form-field>
 
-      <!-- Date Picker Input -->
       <mat-form-field appearance="fill" class="form-group">
         <mat-label>Date</mat-label>
         <input
@@ -42,9 +40,6 @@
         <mat-datepicker #picker></mat-datepicker>
         <mat-error *ngIf="!date">Date is required.</mat-error>
       </mat-form-field>
-
-      <!-- Error Message -->
-      <!-- <div *ngIf="error" class="text-destructive">{{ error }}</div> -->
 
       <div class="flex justify-between items-center mt-4">
         <button
@@ -67,7 +62,6 @@
     </form>
   </div>
 
-  <!-- Prediction Result -->
   <div *ngIf="predictionResult" class="prediction-container">
     <div class="flex flex-col gap-3">
       <div class="prediction-title">Prediction result</div>

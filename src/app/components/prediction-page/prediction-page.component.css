@@ -43,8 +43,8 @@
 }
 
 .mat-snack-bar-container {
-  background-color: #d32f2f; /* Red background for errors */
-  color: #ffffff; /* White text */
+  background-color: #d32f2f; 
+  color: #ffffff;
   font-weight: bold;
 }
 

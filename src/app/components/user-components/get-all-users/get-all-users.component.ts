@@ -14,8 +14,8 @@ import { CommonModule } from '@angular/common';
 export class GetAllUsersComponent implements OnInit {
   users: IUser[] = [];
   totalCount = 0;
-  pageSize = 10; // Default page size
-  pageNumber = 1; // Current page
+  pageSize = 10;
+  pageNumber = 1; 
 
   constructor(private userService: UserService, private router: Router) {}
 

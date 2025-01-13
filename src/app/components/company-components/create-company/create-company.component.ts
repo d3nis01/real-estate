@@ -34,8 +34,7 @@ export class CreateCompanyComponent implements OnInit {
   isSubmitting = false;
   errorMessage: string | null = null;
   existingCompany: any = null;
-  isEditing = false; // New state for editing mode
-
+  isEditing = false; 
   constructor(
     private fb: FormBuilder,
     private companyService: CompanyService,
@@ -61,7 +60,7 @@ export class CreateCompanyComponent implements OnInit {
       country: ['', [Validators.required, Validators.maxLength(100)]],
       description: ['', [Validators.maxLength(500)]],
       profilePicture: ['', Validators.maxLength(2048)],
-      userId: [''], // Will be dynamically populated
+      userId: [''], 
     });
   }
 
@@ -121,10 +120,9 @@ export class CreateCompanyComponent implements OnInit {
           return;
         }
 
-        // Ensure the `id` is included in the request body
         const updatedData = {
           ...formValue,
-          id: this.existingCompany.id, // Add the ID explicitly
+          id: this.existingCompany.id, 
         };
 
         this.companyService
@@ -136,7 +134,7 @@ export class CreateCompanyComponent implements OnInit {
                 duration: 3000,
               });
               this.isEditing = false;
-              this.checkIfCompanyExists(formValue.userId); // Refresh data
+              this.checkIfCompanyExists(formValue.userId); 
             },
             error: (errorResponse) => {
               this.isSubmitting = false;
@@ -150,7 +148,6 @@ export class CreateCompanyComponent implements OnInit {
             },
           });
       } else {
-        // Creating a company
         this.companyService.createCompany(formValue).subscribe({
           next: () => {
             this.isSubmitting = false;

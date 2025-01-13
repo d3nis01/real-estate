@@ -22,24 +22,21 @@ import { AuthService } from '../../../services/auth-service/auth.service';
 })
 export class ListingPageComponent implements OnInit {
   listing: Listing | null = null;
-  userHasCompany = false; // To track if the user has a company
-  ownsListing = false; // To track if the logged-in user owns the listing
+  userHasCompany = false; 
+  ownsListing = false; 
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
     private listingService: ListingService,
-    private companyService: CompanyService // Inject CompanyService
+    private companyService: CompanyService
   ) {}
 
   ngOnInit(): void {
     this.loadListing();
   }
 
-  /**
-   * Fetch the listing details based on the ID from the URL
-   */
   private loadListing(): void {
     const listingId = this.route.snapshot.paramMap.get('id');
     if (listingId) {
@@ -55,18 +52,13 @@ export class ListingPageComponent implements OnInit {
     }
   }
 
-  /**
-   * Check if the user owns the listing or has a company
-   */
   private checkUserAccess(): void {
     this.authService.getCurrentUser().subscribe({
       next: (user) => {
         const userId = user?.userId;
         if (userId) {
-          // Check if the user owns the listing
           this.ownsListing = this.listing?.userId === userId;
 
-          // Check if the user has a company
           this.companyService.getCompanyByUserId(userId).subscribe({
             next: () => {
               this.userHasCompany = true;

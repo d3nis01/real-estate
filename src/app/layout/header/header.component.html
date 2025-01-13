@@ -1,6 +1,5 @@
 <header class="header-container">
   <div class="header-left-side">
-    <!-- Menu Button (Visible under 992px) -->
     <button
       class="menu-button lg:hidden"
       mat-icon-button
@@ -10,7 +9,6 @@
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #mobileMenu="matMenu">
-      <!-- Include dynamic menu options -->
       <button mat-menu-item (click)="goToLandingPage()">Home</button>
       <button mat-menu-item (click)="goToPredictPrice()">Predict Price</button>
       <button mat-menu-item [matMenuTriggerFor]="companiesMenu">
@@ -19,7 +17,6 @@
       <button mat-menu-item [matMenuTriggerFor]="listingsMenu">Listings</button>
     </mat-menu>
 
-    <!-- Logo (Visible always) -->
     <div class="flex items-center gap-2" (click)="goToLandingPage()">
       <div class="header-logo">
         <svg
@@ -57,9 +54,7 @@
     </div>
   </div>
 
-  <!-- Rest of the Header -->
   <div class="header-center lg:flex hidden">
-    <!-- Full menu options (Visible only when screen width is >= 992px) -->
     <div class="header-center-element">
       <button mat-button color="primary" (click)="goToLandingPage()">
         Home
@@ -94,9 +89,7 @@
     </mat-menu>
   </div>
 
-  <!-- Right side -->
   <div class="header-right-side">
-    <!-- Login/Register or User Info -->
     <ng-container *ngIf="isLoggedIn; else guestButtons">
       <div class="header-user-info">
         <span>Welcome, {{ username }}</span>

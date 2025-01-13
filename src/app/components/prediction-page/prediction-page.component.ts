@@ -22,7 +22,7 @@ import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
     MatButtonModule,
     ReactiveFormsModule,
     MatNativeDateModule,
-    MatSnackBarModule, // Add Snackbar Module
+    MatSnackBarModule, 
   ],
   templateUrl: './prediction-page.component.html',
   styleUrls: ['./prediction-page.component.css'],
@@ -35,7 +35,7 @@ export class PredictionPageComponent {
 
   constructor(
     private predictionService: PredictionService,
-    private snackBar: MatSnackBar // Inject MatSnackBar
+    private snackBar: MatSnackBar 
   ) {}
 
   private formatDate(date: string): string {
@@ -48,7 +48,7 @@ export class PredictionPageComponent {
 
   onSubmit(): void {
     if (!this.country || !this.countrycode || !this.date) {
-      this.openSnackBar('Please fill in all fields.', 'Close'); // Show snackbar
+      this.openSnackBar('Please fill in all fields.', 'Close'); 
       return;
     }
 
@@ -70,7 +70,7 @@ export class PredictionPageComponent {
         this.openSnackBar(
           'An error occurred while fetching the prediction.',
           'Close'
-        ); // Show snackbar on error
+        ); 
         console.error(err);
       },
     });
@@ -85,9 +85,9 @@ export class PredictionPageComponent {
 
   private openSnackBar(message: string, action: string): void {
     this.snackBar.open(message, action, {
-      duration: 3000, // Snackbar duration in milliseconds
-      verticalPosition: 'bottom', // Position at the top
-      horizontalPosition: 'center', // Center horizontally
+      duration: 3000, 
+      verticalPosition: 'bottom', 
+      horizontalPosition: 'center', 
     });
   }
 }

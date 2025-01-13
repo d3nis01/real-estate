@@ -33,8 +33,8 @@ export class GetAllCompaniesComponent implements OnInit {
   ];
   companies: ICompany[] = [];
   totalCount = 0;
-  pageSize = 10; // Default page size
-  pageIndex = 0; // Current page index
+  pageSize = 10; 
+  pageIndex = 0; 
 
   constructor(
     private companyService: CompanyService,
@@ -68,7 +68,7 @@ export class GetAllCompaniesComponent implements OnInit {
   openCompanyDetails(company: ICompany): void {
     this.dialog.open(CompanyDetailsDialogComponent, {
       width: '400px',
-      data: company, // Pass the selected company data to the dialog
+      data: company, 
     });
   }
 }

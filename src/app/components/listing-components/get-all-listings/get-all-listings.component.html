@@ -1,25 +1,7 @@
-<!-- <div class="nav-bar">
-     <li>
-      <a (click)="goToCreateListing()" routerLink="/create-listing"
-        >Create Listing</a
-      >
-      <a (click)="goToGetAllUsers()" routerLink="/get-all-users"
-        >All Users</a
-      >
-    </li>
-  </div> -->
 <div class="listing-details">
-  <!-- Filters -->
   <div class="filters-wrapper">
-    <!-- <button class="filter-btn" (click)="filterByDate()">
-      Sort by Date (Ascending)
-    </button>
-    <button class="filter-btn" (click)="filterByBudget()">
-      Sort by Budget (Ascending)
-    </button> -->
   </div>
 
-  <!-- Listings -->
   <div class="listings-container">
     <div class="listing-card" *ngFor="let listing of paginatedListings">
       <h3>{{ listing.title }}</h3>
@@ -35,7 +17,6 @@
     </div>
   </div>
 
-  <!-- Pagination -->
   <div class="pagination-wrapper">
     <button (click)="prevPage()" [disabled]="currentPage === 1">
       Previous

@@ -18,7 +18,6 @@
   flex-direction: column;
   flex: 1;
   min-height: calc(100vh - 64px);
-  /* width: calc(100vw - 240px); */
   width: 100%;
   align-items: center;
   background-color: white;

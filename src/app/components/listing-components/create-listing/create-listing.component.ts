@@ -8,7 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { ListingStatus } from '../../../models/listing';
 import { ListingService } from '../../../services/listing-service/listing.service';
-import { AuthService } from '../../../services/auth-service/auth.service'; // Import AuthService
+import { AuthService } from '../../../services/auth-service/auth.service'; 
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -42,9 +42,9 @@ export class CreateListingComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private listingService: ListingService,
-    private authService: AuthService, // Inject AuthService
+    private authService: AuthService, 
     private router: Router,
-    private snackBar: MatSnackBar // SnackBar for user feedback
+    private snackBar: MatSnackBar 
   ) {
     this.listingForm = this.fb.group({
       title: [
@@ -63,10 +63,10 @@ export class CreateListingComponent implements OnInit {
       image: ['', [Validators.maxLength(200)]],
       budget: [
         '',
-        [Validators.required, Validators.min(0.01)], // Budget > 0
+        [Validators.required, Validators.min(0.01)],
       ],
       status: ['', [Validators.required]],
-      constructionDeadline: ['', [Validators.required]], // Validation on the server will ensure it's in the future
+      constructionDeadline: ['', [Validators.required]], 
     });
   }
 
@@ -74,9 +74,6 @@ export class CreateListingComponent implements OnInit {
     this.fetchCurrentUser();
   }
 
-  /**
-   * Fetch the current user and set the userId
-   */
   fetchCurrentUser(): void {
     this.authService.getCurrentUser().subscribe({
       next: (user) => {
@@ -91,21 +88,17 @@ export class CreateListingComponent implements OnInit {
     });
   }
 
-  /**
-   * Handle form submission
-   */
   onSubmit(): void {
     if (this.listingForm.valid && this.userId) {
       this.isSubmitting = true;
       this.errorMessage = null;
 
-      // Transform constructionDeadline to UTC format
       const listingData = {
         ...this.listingForm.value,
         userId: this.userId,
         constructionDeadline: new Date(
           this.listingForm.value.constructionDeadline
-        ).toISOString(), // Ensure the date is in ISO UTC format
+        ).toISOString(), 
       };
 
       this.listingService.createListing(listingData).subscribe({
@@ -114,20 +107,17 @@ export class CreateListingComponent implements OnInit {
           this.snackBar.open('Listing created successfully!', 'Close', {
             duration: 3000,
           });
-          this.router.navigate(['/get-all-listings']); // Navigate to the list of listings
+          this.router.navigate(['/get-all-listings']); 
         },
         error: (errorResponse) => {
           this.isSubmitting = false;
           if (errorResponse.error && errorResponse.error.validationErrors) {
-            // Handle validation errors and display them in the form
             errorResponse.error.validationErrors.forEach((error: string) => {
               if (error.includes('Title')) {
                 this.listingForm.get('title')?.setErrors({ invalid: true });
               }
-              // Add other field-specific error handling here if needed
             });
           } else {
-            // General error handling
             this.errorMessage =
               errorResponse.error?.title || 'An error occurred.';
             this.snackBar.open(

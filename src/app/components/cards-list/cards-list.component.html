@@ -12,7 +12,6 @@
   </div>
 
   <div class="card-grid">
-    <!-- Dynamically generate cards from API -->
     <div class="card-container" *ngFor="let listing of listings">
       <img
         [src]="listing.image || 'assets/images/placeholder.png'"
@@ -37,7 +36,6 @@
     </div>
   </div>
 
-  <!-- Add paginator -->
   <mat-paginator
     [length]="totalItems"
     [pageSize]="pageSize"

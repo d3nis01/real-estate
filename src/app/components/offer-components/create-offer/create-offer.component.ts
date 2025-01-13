@@ -39,7 +39,7 @@ export class CreateOfferComponent implements OnInit {
   listingId: string | null = null;
 
   offerStatusOptions = ['Pending', 'Accepted', 'Rejected'];
-  companyId: string | null = null; // Store the fetched company ID
+  companyId: string | null = null; 
 
   constructor(
     private fb: FormBuilder,
@@ -80,9 +80,6 @@ export class CreateOfferComponent implements OnInit {
     this.fetchCompanyId();
   }
 
-  /**
-   * Fetch the company ID for the current user
-   */
   private fetchCompanyId(): void {
     this.authService.getCurrentUser().subscribe({
       next: (user) => {
@@ -90,7 +87,7 @@ export class CreateOfferComponent implements OnInit {
         if (userId) {
           this.companyService.getCompanyByUserId(userId).subscribe({
             next: (company) => {
-              this.companyId = company.id; // Store the company ID
+              this.companyId = company.id;
             },
             error: () => {
               this.snackBar.open(
@@ -100,7 +97,7 @@ export class CreateOfferComponent implements OnInit {
                   duration: 3000,
                 }
               );
-              this.router.navigate(['/']); // Redirect if the company is not found
+              this.router.navigate(['/']); 
             },
           });
         }
@@ -109,7 +106,7 @@ export class CreateOfferComponent implements OnInit {
         this.snackBar.open('Failed to fetch user information.', 'Close', {
           duration: 3000,
         });
-        this.router.navigate(['/']); // Redirect if the user is not found
+        this.router.navigate(['/']); 
       },
     });
   }
@@ -121,9 +118,9 @@ export class CreateOfferComponent implements OnInit {
       const offerData: IOffer = {
         ...this.offerForm.value,
         listingId: this.listingId,
-        companyId: this.companyId, // Use the dynamically fetched company ID
-        createdAt: new Date().toISOString(), // Ensure createdAt is in UTC
-        deadline: new Date(this.offerForm.value.deadline).toISOString(), // Ensure deadline is in UTC
+        companyId: this.companyId, 
+        createdAt: new Date().toISOString(), 
+        deadline: new Date(this.offerForm.value.deadline).toISOString(), 
       };
 
       this.offerService.createOffer(offerData).subscribe({
@@ -133,7 +130,6 @@ export class CreateOfferComponent implements OnInit {
             duration: 3000,
           });
 
-          // Navigate back to the listing page
           this.router.navigate(['/listing', this.listingId]);
         },
         error: (err) => {

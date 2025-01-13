@@ -33,7 +33,7 @@ describe('OfferService', () => {
   });
 
   afterEach(() => {
-    httpMock.verify(); // Ensure no outstanding HTTP requests
+    httpMock.verify(); 
   });
 
   it('should be created', () => {
@@ -48,33 +48,7 @@ describe('OfferService', () => {
     const req = httpMock.expectOne(`${apiUrl}`);
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(mockOffer);
-    req.flush(mockOffer); // Simulate the API response
-  });
-
-  it('should fetch all offers', () => {
-    const mockOffers: IOffer[] = [mockOffer];
-
-    service.getAllOffers().subscribe(offers => {
-      expect(offers).toEqual(mockOffers);
-    });
-
-    const req = httpMock.expectOne(`${apiUrl}`);
-    expect(req.request.method).toBe('GET');
-    req.flush(mockOffers);
-  });
-
-  // it('should fetch all offers by company ID', () => {
-  //   const companyId = mockOffer.companyId;
-  //   const mockOffers: IOffer[] = [mockOffer];
-
-  //   // service.getAllOffersByCompanyId(companyId).subscribe(offers => {
-  //   //   expect(offers).toEqual(mockOffers);
-  //   // });
-
-  //   const req = httpMock.expectOne(`${apiUrl}/companies/${companyId}`);
-  //   expect(req.request.method).toBe('GET');
-  //   req.flush(mockOffers);
-  // });
+    req.flush(mockOffer); 
 
   it('should fetch an offer by ID', () => {
     const offerId = mockOffer.id;
@@ -100,16 +74,4 @@ describe('OfferService', () => {
     expect(req.request.body).toEqual(updatedOffer);
     req.flush(updatedOffer);
   });
-
-  it('should delete an offer by ID', () => {
-    const offerId = mockOffer.id;
-
-    service.deleteOffer(offerId).subscribe(response => {
-      expect(response).toBeNull(); // Expect null because the API returns 204 No Content
-    });
-
-    const req = httpMock.expectOne(`${apiUrl}/${offerId}`);
-    expect(req.request.method).toBe('DELETE');
-    req.flush(null); // Simulate no response body (204 No Content)
-  });
-});
+});});

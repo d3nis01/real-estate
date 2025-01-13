@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IOffer } from '../../../models/offer';
 import { OfferService } from '../../../services/offer-service/offer.service';
 import { CompanyService } from '../../../services/company-service/company.service';
-import { ListingService } from '../../../services/listing-service/listing.service'; // Import ListingService
+import { ListingService } from '../../../services/listing-service/listing.service'; 
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
@@ -29,10 +29,10 @@ export class GetAllOffersComponent implements OnInit {
   displayedColumns: string[] = ['companyName', 'deadline', 'price', 'actions'];
   offers: IOffer[] = [];
   totalCount = 0;
-  pageSize = 10; // Default page size
-  pageIndex = 0; // Current page index
+  pageSize = 10; 
+  pageIndex = 0; 
   listingId: string | null = null;
-  listingName: string = ''; // To store the listing name
+  listingName: string = ''; 
 
   constructor(
     private offerService: OfferService,

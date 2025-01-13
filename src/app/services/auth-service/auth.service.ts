@@ -68,7 +68,6 @@ export class AuthService {
       .pipe(
         tap(() => {
           this.currentUserSubject.next(null);
-          // window.location.reload();
         })
       );
   }

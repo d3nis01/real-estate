@@ -20,18 +20,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class OfferDetailsDialogComponent implements OnInit {
   isDeleting = false;
-  companyName: string = 'Unknown'; // Default to 'Unknown'
+  companyName: string = 'Unknown'; 
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public offer: IOffer,
     private dialogRef: MatDialogRef<OfferDetailsDialogComponent>,
     private offerService: OfferService,
     private companyService: CompanyService,
-    private snackBar: MatSnackBar // Inject the MatSnackBar service
+    private snackBar: MatSnackBar 
   ) {}
 
   ngOnInit(): void {
-    // Fetch company name dynamically
     this.companyService.getCompanyById(this.offer.companyId).subscribe({
       next: (company) => {
         this.companyName = company.name;
@@ -54,9 +53,8 @@ export class OfferDetailsDialogComponent implements OnInit {
         next: () => {
           this.isDeleting = false;
 
-          // Show success message
           this.snackBar.open('Offer was successfully deleted!', 'Close', {
-            duration: 3000, // Duration in milliseconds
+            duration: 3000, 
           });
 
           this.dialogRef.close({ deleted: true });
@@ -64,7 +62,6 @@ export class OfferDetailsDialogComponent implements OnInit {
         error: (err) => {
           console.error('Error deleting offer:', err);
 
-          // Show error message
           this.snackBar.open(
             'Failed to delete the offer. Try again later.',
             'Close',

@@ -17,9 +17,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 })
 export class GetUserListingsComponent implements OnInit {
   listings: Listing[] = [];
-  totalItems = 0; // Total number of listings
-  pageSize = 10; // Number of items per page
-  currentPage = 0; // Current page index
+  totalItems = 0; 
+  pageSize = 10;
+  currentPage = 0; 
 
   constructor(
     private listingService: ListingService,
@@ -31,9 +31,6 @@ export class GetUserListingsComponent implements OnInit {
     this.fetchCurrentUserListings();
   }
 
-  /**
-   * Fetch the current user's listings
-   */
   fetchCurrentUserListings(): void {
     this.authService.getCurrentUser().subscribe({
       next: (user) => {
@@ -42,15 +39,11 @@ export class GetUserListingsComponent implements OnInit {
       },
       error: () => {
         console.error('Failed to fetch current user');
-        this.router.navigate(['/login']); // Redirect to login if the user is not authenticated
+        this.router.navigate(['/login']); 
       },
     });
   }
 
-  /**
-   * Fetch listings by the given user ID
-   * @param userId - Current user ID
-   */
   fetchListingsByUserId(userId: string): void {
     this.listingService.getListingsByUserId(userId).subscribe({
       next: (response) => {
@@ -62,20 +55,12 @@ export class GetUserListingsComponent implements OnInit {
     });
   }
 
-  /**
-   * Handle page change events from the paginator
-   * @param event PageEvent
-   */
   onPageChange(event: PageEvent): void {
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
     this.fetchCurrentUserListings();
   }
 
-  /**
-   * Navigate to the listing details page
-   * @param id - Listing ID
-   */
   viewDetails(id: string): void {
     this.router.navigate([`/listing/${id}`]);
   }

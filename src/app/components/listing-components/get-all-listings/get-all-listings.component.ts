@@ -24,7 +24,6 @@ export class GetAllListingsComponent implements OnInit {
     this.fetchAllListings();
   }
 
-  // Fetch all listings
   fetchAllListings(): void {
     this.listingService.getAllListings(1, 100).subscribe((response) => {
       this.listings = response.items;
@@ -32,31 +31,12 @@ export class GetAllListingsComponent implements OnInit {
     });
   }
 
-  // // Fetch listings filtered by date (ascending)
-  // filterByDate(): void {
-  //   this.listingService.getAllListingsByDateAscending().subscribe((data) => {
-  //     this.listings = data; // Update listings with filtered data
-  //     console.log(this.listings);
-  //     this.reinitializePagination(); // Reset pagination
-  //   });
-  // }
-
-  // // Fetch listings filtered by budget (ascending)
-  // filterByBudget(): void {
-  //   this.listingService.getAllListingsByBudgetAscending().subscribe((data) => {
-  //     this.listings = data; // Update listings with filtered data
-  //     this.reinitializePagination(); // Reset pagination
-  //   });
-  // }
-
-  // Reinitialize pagination
   reinitializePagination(): void {
     this.currentPage = 1;
     this.totalPages = Math.ceil(this.listings.length / this.pageSize);
     this.paginateListings();
   }
 
-  // Paginate the listings
   paginateListings(): void {
     const startIndex = (this.currentPage - 1) * this.pageSize;
     this.paginatedListings = this.listings.slice(
@@ -65,7 +45,6 @@ export class GetAllListingsComponent implements OnInit {
     );
   }
 
-  // Navigate to the next page
   nextPage(): void {
     if (this.currentPage < this.totalPages) {
       this.currentPage++;
@@ -73,7 +52,6 @@ export class GetAllListingsComponent implements OnInit {
     }
   }
 
-  // Navigate to the previous page
   prevPage(): void {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -81,12 +59,10 @@ export class GetAllListingsComponent implements OnInit {
     }
   }
 
-  // Navigate to view listing details
   viewListing(id: string): void {
     this.router.navigate([`/listing/${id}`]);
   }
 
-  // Navigate back to the dashboard
   goToGetAllUsers(): void {
     this.router.navigate(['']);
   }

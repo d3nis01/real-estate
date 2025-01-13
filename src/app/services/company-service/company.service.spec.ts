@@ -33,7 +33,7 @@ describe('CompanyService', () => {
   });
 
   afterEach(() => {
-    httpMock.verify(); // Ensure no outstanding HTTP requests
+    httpMock.verify(); 
   });
 
   it('should be created', () => {
@@ -48,7 +48,7 @@ describe('CompanyService', () => {
     const req = httpMock.expectOne(`${baseUrl}`);
     expect(req.request.method).toBe('POST');
     expect(req.request.body).toEqual(mockCompany);
-    req.flush(mockCompany); // Simulate the API response
+    req.flush(mockCompany); 
   });
 
   it('should fetch all companies', () => {
@@ -92,12 +92,12 @@ describe('CompanyService', () => {
   });
 
   it('should delete a company by ID', () => {
-    service.deleteCompany(mockCompany.id).subscribe((response) => {
-      expect(response).toBeNull(); // Allow null as a valid response
+    service.deleteCompany(mockCompany.id, 'id').subscribe((response) => {
+      expect(response).toBeNull(); 
     });
 
     const req = httpMock.expectOne(`${baseUrl}/${mockCompany.id}`);
     expect(req.request.method).toBe('DELETE');
-    req.flush(null); // Simulate no response body
+    req.flush(null); 
   });
 });

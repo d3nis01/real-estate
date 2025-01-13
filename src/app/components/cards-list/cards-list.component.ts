@@ -17,16 +17,16 @@ import { Listing } from '../../models/listing';
 })
 export class CardsListComponent implements OnInit {
   listings: Listing[] = [];
-  totalItems = 0; // Total number of items from the backend
-  pageSize = 10; // Number of items per page
-  currentPage = 0; // Current page index
-  isLoggedIn = false; // Track user's login status
+  totalItems = 0; 
+  pageSize = 10; 
+  currentPage = 0; 
+  isLoggedIn = false; 
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private listingService: ListingService,
-    private authService: AuthService, // Inject AuthService
+    private authService: AuthService, 
     private router: Router
   ) {}
 
@@ -35,13 +35,10 @@ export class CardsListComponent implements OnInit {
     this.fetchListings();
   }
 
-  /**
-   * Check user's login status
-   */
   private checkLoginStatus(): void {
     this.authService.getCurrentUser().subscribe({
       next: (user) => {
-        this.isLoggedIn = !!user; // Set true if user exists
+        this.isLoggedIn = !!user;
       },
       error: () => {
         this.isLoggedIn = false;
@@ -49,16 +46,13 @@ export class CardsListComponent implements OnInit {
     });
   }
 
-  /**
-   * Fetch listings based on the current page and page size
-   */
   fetchListings(): void {
     this.listingService
       .getAllListings(this.currentPage + 1, this.pageSize)
       .subscribe({
         next: (response) => {
           this.listings = response.items;
-          this.totalItems = response.totalCount; // Update the total number of items
+          this.totalItems = response.totalCount; 
         },
         error: (error) => {
           console.error('Failed to fetch listings:', error);
@@ -66,20 +60,12 @@ export class CardsListComponent implements OnInit {
       });
   }
 
-  /**
-   * Handle page change events from the paginator
-   * @param event PageEvent
-   */
   onPageChange(event: PageEvent): void {
     this.currentPage = event.pageIndex;
     this.pageSize = event.pageSize;
-    this.fetchListings(); // Fetch new data when the page changes
+    this.fetchListings(); 
   }
 
-  /**
-   * Navigate to the listing details page
-   * @param id - Listing ID
-   */
   viewDetails(id: string): void {
     this.router.navigate([`/listing/${id}`]);
   }

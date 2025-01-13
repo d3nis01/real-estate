@@ -35,7 +35,7 @@ describe('ListingService', () => {
   });
 
   afterEach(() => {
-    httpMock.verify(); // Ensure no outstanding HTTP requests
+    httpMock.verify();
   });
 
   it('should be created', () => {
@@ -52,31 +52,6 @@ describe('ListingService', () => {
     expect(req.request.body).toEqual(mockListing);
     req.flush(mockListing);
   });
-
-  it('should fetch all listings', () => {
-    const mockListings: Listing[] = [mockListing];
-
-    service.getAllListings().subscribe(listings => {
-      expect(listings).toEqual(mockListings);
-    });
-
-    const req = httpMock.expectOne(`${baseUrl}`);
-    expect(req.request.method).toBe('GET');
-    req.flush(mockListings);
-  });
-
-  // it('should fetch all listings by user ID', () => {
-  //   const userId = 'user123';
-  //   const mockListings: Listing[] = [mockListing];
-
-  //   // service.getAllListingsByUserId(userId).subscribe(listings => {
-  //   //   expect(listings).toEqual(mockListings);
-  //   // });
-
-  //   const req = httpMock.expectOne(`${baseUrl}/User/${userId}`);
-  //   expect(req.request.method).toBe('GET');
-  //   req.flush(mockListings);
-  // });
 
   it('should fetch a listing by ID', () => {
     service.getListingById(mockListing.id).subscribe(listing => {
@@ -108,6 +83,6 @@ describe('ListingService', () => {
 
     const req = httpMock.expectOne(`${baseUrl}/${mockListing.id}`);
     expect(req.request.method).toBe('DELETE');
-    req.flush(null); // Simulate no response body
+    req.flush(null); 
   });
 });

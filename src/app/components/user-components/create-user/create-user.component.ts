@@ -63,7 +63,7 @@ export class CreateUserComponent implements OnInit {
       this.userService.createUser(this.userForm.value).subscribe({
         next: () => {
           this.isSubmitting = false;
-          this.router.navigate(['/get-all-users']); // Navigate to the list of users
+          this.router.navigate(['/get-all-users']); 
         },
         error: (errorResponse) => {
           this.isSubmitting = false;

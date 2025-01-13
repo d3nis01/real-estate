@@ -14,7 +14,6 @@
 
     <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="form-container">
       <div class="fields-wrapper">
-        <!-- Username -->
         <div class="form-group">
           <label for="username">Username</label>
           <input id="username" formControlName="username" type="text" />
@@ -37,7 +36,6 @@
           </small>
         </div>
 
-        <!-- Password -->
         <div class="form-group">
           <label for="password">Password</label>
           <input id="password" formControlName="password" type="password" />
@@ -57,7 +55,6 @@
           </small>
         </div>
 
-        <!-- First Name -->
         <div class="form-group">
           <label for="firstName">First Name</label>
           <input id="firstName" formControlName="firstName" type="text" />
@@ -77,7 +74,6 @@
           </small>
         </div>
 
-        <!-- Last Name -->
         <div class="form-group">
           <label for="lastName">Last Name</label>
           <input id="lastName" formControlName="lastName" type="text" />
@@ -97,7 +93,6 @@
           </small>
         </div>
 
-        <!-- Email -->
         <div class="form-group">
           <label for="email">Email</label>
           <input id="email" formControlName="email" type="email" />
@@ -116,7 +111,6 @@
           </small>
         </div>
 
-        <!-- Phone Number -->
         <div class="form-group">
           <label for="phoneNumber">Phone Number</label>
           <input id="phoneNumber" formControlName="phoneNumber" type="text" />
@@ -136,7 +130,6 @@
           </small>
         </div>
 
-        <!-- City -->
         <div class="form-group">
           <label for="city">City</label>
           <input id="city" formControlName="city" type="text" />
@@ -155,7 +148,6 @@
           </small>
         </div>
 
-        <!-- Country -->
         <div class="form-group">
           <label for="country">Country</label>
           <input id="country" formControlName="country" type="text" />
@@ -175,7 +167,6 @@
           </small>
         </div>
 
-        <!-- User Type -->
         <div class="form-group">
           <label for="userType">User Type</label>
           <select id="userType" formControlName="userType">
@@ -186,7 +177,6 @@
         </div>
       </div>
 
-      <!-- Buttons -->
       <div class="buttons-wrapper">
         <button
           class="btn-submit"
