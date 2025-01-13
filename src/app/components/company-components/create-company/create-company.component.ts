@@ -33,7 +33,8 @@ export class CreateCompanyComponent implements OnInit {
   companyForm: FormGroup;
   isSubmitting = false;
   errorMessage: string | null = null;
-  existingCompany: any = null; // To hold existing company details
+  existingCompany: any = null;
+  isEditing = false; // New state for editing mode
 
   constructor(
     private fb: FormBuilder,
@@ -64,8 +65,6 @@ export class CreateCompanyComponent implements OnInit {
     });
   }
 
-  private _snackBar = inject(MatSnackBar);
-
   ngOnInit(): void {
     this.fetchUserId();
   }
@@ -81,9 +80,7 @@ export class CreateCompanyComponent implements OnInit {
         this.snackBar.open(
           'Failed to fetch User ID. Please try again.',
           'Close',
-          {
-            duration: 3000,
-          }
+          { duration: 3000 }
         );
         this.router.navigate(['/']);
       },
@@ -93,12 +90,17 @@ export class CreateCompanyComponent implements OnInit {
   checkIfCompanyExists(userId: string): void {
     this.companyService.getCompanyByUserId(userId).subscribe({
       next: (company) => {
-        this.existingCompany = company; // Set company details if found
+        this.existingCompany = company;
       },
       error: () => {
-        this.existingCompany = null; // Reset if no company is found
+        this.existingCompany = null;
       },
     });
+  }
+
+  editCompany(): void {
+    this.isEditing = true;
+    this.companyForm.patchValue(this.existingCompany);
   }
 
   onSubmit(): void {
@@ -106,32 +108,72 @@ export class CreateCompanyComponent implements OnInit {
       this.isSubmitting = true;
       this.errorMessage = null;
 
-      this.companyService.createCompany(this.companyForm.value).subscribe({
-        next: () => {
+      const formValue = this.companyForm.value;
+
+      if (this.isEditing) {
+        if (!this.existingCompany || !this.existingCompany.id) {
           this.isSubmitting = false;
-          this.snackBar.open('Company created successfully!', 'Close', {
-            duration: 3000,
-          });
-          this.router.navigate(['/get-all-companies']);
-        },
-        error: (errorResponse) => {
-          this.isSubmitting = false;
-          this.errorMessage =
-            errorResponse.error?.title || 'An error occurred.';
           this.snackBar.open(
-            this.errorMessage || 'An error occurred.',
+            'Error: Existing company ID is missing. Cannot update.',
             'Close',
-            {
-              duration: 3000,
-            }
+            { duration: 3000 }
           );
-        },
-      });
+          return;
+        }
+
+        // Ensure the `id` is included in the request body
+        const updatedData = {
+          ...formValue,
+          id: this.existingCompany.id, // Add the ID explicitly
+        };
+
+        this.companyService
+          .updateCompany(this.existingCompany.id, updatedData)
+          .subscribe({
+            next: () => {
+              this.isSubmitting = false;
+              this.snackBar.open('Company updated successfully!', 'Close', {
+                duration: 3000,
+              });
+              this.isEditing = false;
+              this.checkIfCompanyExists(formValue.userId); // Refresh data
+            },
+            error: (errorResponse) => {
+              this.isSubmitting = false;
+              this.errorMessage =
+                errorResponse.error?.message || 'An error occurred.';
+              this.snackBar.open(
+                this.errorMessage || 'An error occurred.',
+                'Close',
+                { duration: 3000 }
+              );
+            },
+          });
+      } else {
+        // Creating a company
+        this.companyService.createCompany(formValue).subscribe({
+          next: () => {
+            this.isSubmitting = false;
+            this.snackBar.open('Company created successfully!', 'Close', {
+              duration: 3000,
+            });
+            this.router.navigate(['/get-all-companies']);
+          },
+          error: (errorResponse) => {
+            this.isSubmitting = false;
+            this.errorMessage =
+              errorResponse.error?.message || 'An error occurred.';
+            this.snackBar.open(
+              this.errorMessage || 'An error occurred.',
+              'Close',
+              { duration: 3000 }
+            );
+          },
+        });
+      }
     } else {
       this.errorMessage = 'Please fix the errors in the form.';
-      this.snackBar.open(this.errorMessage, 'Close', {
-        duration: 3000,
-      });
+      this.snackBar.open(this.errorMessage, 'Close', { duration: 3000 });
     }
   }
 

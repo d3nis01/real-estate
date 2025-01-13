@@ -1,7 +1,7 @@
 <div class="listing-page-container" *ngIf="listing">
   <div class="lp-header">
     <div class="lp-header-left">
-      <div class="lp-header-left-title">{{ listing?.title }}</div>
+      <div class="lp-header-left-title">{{ listing.title }}</div>
       <div class="lp-header-left-location">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -17,16 +17,16 @@
             fill="black"
           />
         </svg>
-        {{ listing?.city }}, {{ listing?.country }}
+        {{ listing.city }}, {{ listing.country }}
       </div>
     </div>
-    <div class="lp-header-right">${{ listing?.budget | number : "1.0-0" }}</div>
+    <div class="lp-header-right">${{ listing.budget | number : "1.0-0" }}</div>
   </div>
   <div class="lp-image-container">
     <img
       class="lp-image"
-      [src]="listing?.image || 'assets/images/placeholder.png'"
-      alt="{{ listing?.title }}"
+      [src]="listing.image || 'assets/images/placeholder.png'"
+      alt="{{ listing.title }}"
     />
   </div>
   <div class="lp-top-container">
@@ -34,7 +34,7 @@
       <div class="lp-text-container">
         <div class="lp-title">Description</div>
         <div class="lp-description">
-          {{ listing?.description }}
+          {{ listing.description }}
         </div>
       </div>
       <div class="separator"></div>
@@ -42,16 +42,16 @@
       <div class="flex justify-between items-center gap-2 pl-4 pr-4">
         <div class="flex flex-col gap-2">
           <div class="text-md text-primary font-bold">Project Type</div>
-          <div class="text-sm text-foreground">{{ listing?.projectType }}</div>
+          <div class="text-sm text-foreground">{{ listing.projectType }}</div>
         </div>
         <div class="flex flex-col gap-2">
           <div class="text-md text-primary font-bold">Status</div>
-          <div class="text-sm text-foreground">{{ listing?.status }}</div>
+          <div class="text-sm text-foreground">{{ listing.status }}</div>
         </div>
         <div class="flex flex-col gap-2">
           <div class="text-md text-primary font-bold">Deadline</div>
           <div class="text-sm text-foreground">
-            {{ listing?.constructionDeadline | date : "longDate" }}
+            {{ listing.constructionDeadline | date : "longDate" }}
           </div>
         </div>
       </div>
@@ -97,7 +97,7 @@
               fill="black"
             />
           </svg>
-          Created on: {{ listing?.createdAt | date : "longDate" }}
+          Created on: {{ listing.createdAt | date : "longDate" }}
         </div>
 
         <div class="lp-feature-container">
@@ -115,7 +115,7 @@
               fill="black"
             />
           </svg>
-          Location: {{ listing?.city }}, {{ listing?.country }}
+          Location: {{ listing.city }}, {{ listing.country }}
         </div>
 
         <div class="lp-feature-container">
@@ -133,7 +133,7 @@
               fill="black"
             />
           </svg>
-          Budget: ${{ listing?.budget | number : "1.0-0" }}
+          Budget: ${{ listing.budget | number : "1.0-0" }}
         </div>
 
         <div class="lp-feature-container">

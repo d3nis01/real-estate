@@ -12,8 +12,6 @@
     width: 100vw;
   }
 }
-
-/* Navigation Bar Styling */
 .nav-bar {
   padding: 12px;
   display: flex;
@@ -35,7 +33,6 @@
   background-color: #0056b3;
 }
 
-/* Company Table Styling */
 .company-table {
   padding: 1rem 0;
   max-width: 1200px;
@@ -105,32 +102,6 @@ tbody tr:hover {
   }
 }
 
-.details-button:hover {
-  background-color: #0056b3;
-}
-
-/* Pagination Styling */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  padding: 10px 0;
-  font-size: 16px;
-}
-
-.pagination-button {
-  padding: 10px 15px;
-  font-size: 14px;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  width: 100px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
 .pagination-button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
@@ -197,9 +168,9 @@ tbody tr:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   @media (max-width: 690px) {
-    max-width: 90px; /* Optional: Set a specific max width */
+    max-width: 90px;
   }
   @media (max-width: 360px) {
-    max-width: 140px; /* Optional: Set a specific max width */
+    max-width: 140px;
   }
 }

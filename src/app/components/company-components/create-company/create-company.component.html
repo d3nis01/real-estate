@@ -14,30 +14,51 @@
       </ul>
     </div>
 
-    <ng-container *ngIf="existingCompany; else createForm">
+    <ng-container *ngIf="existingCompany && !isEditing; else formContainer">
       <h2>Your Company Details</h2>
-      <div class="company-details">
-        <p><strong>Name:</strong> {{ existingCompany.name }}</p>
-        <p><strong>Email:</strong> {{ existingCompany.email }}</p>
-        <p><strong>Phone:</strong> {{ existingCompany.phoneNumber }}</p>
-        <p><strong>City:</strong> {{ existingCompany.city }}</p>
-        <p><strong>Country:</strong> {{ existingCompany.country }}</p>
-        <p><strong>Description:</strong> {{ existingCompany.description }}</p>
-        <img
-          *ngIf="existingCompany.profilePicture"
-          [src]="existingCompany.profilePicture"
-          alt="Company Profile Picture"
-        />
+      <div class="company-details flex flex-col gap-2">
+        <div class="flex items-center gap-2">
+          <img
+            *ngIf="existingCompany.profilePicture"
+            [src]="existingCompany.profilePicture"
+            alt="Company Profile Picture"
+            class="h-[40px] w-[40px] border-secondary border rounded-full bg-secondary"
+          />
+          <div class="flex gap-1 flex-col justify-center">
+            <div class="text-[20px] font-bold">{{ existingCompany.name }}</div>
+            <div class="text--sm font-bold">
+              {{ existingCompany.city }}, {{ existingCompany.country }}
+            </div>
+          </div>
+        </div>
+        <div><strong>Email:</strong> {{ existingCompany.email }}</div>
+        <div>
+          <strong>Phone Number:</strong> {{ existingCompany.phoneNumber }}
+        </div>
+        <div>
+          <strong>Location:</strong> {{ existingCompany.city }},
+          {{ existingCompany.country }}
+        </div>
+        <div class="flex flex-col gap-1">
+          <strong>Description:</strong> {{ existingCompany.description }}
+        </div>
+      </div>
+      <div class="flex items-end justify-end">
+        <button mat-flat-button color="accent" (click)="editCompany()">
+          Edit Company
+        </button>
       </div>
     </ng-container>
 
-    <ng-template #createForm>
-      <h2>Create Company</h2>
+    <ng-template #formContainer>
+      <h2 *ngIf="!isEditing">Create Company</h2>
+      <h2 *ngIf="isEditing">Edit Company</h2>
       <form
         [formGroup]="companyForm"
         (ngSubmit)="onSubmit()"
         class="form-container"
       >
+        <!-- Fields are the same as the original form -->
         <div class="fields-wrapper">
           <!-- Column 1 -->
           <div class="form-group">
@@ -139,7 +160,15 @@
             type="submit"
             [disabled]="companyForm.invalid || isSubmitting"
           >
-            {{ isSubmitting ? "Creating..." : "Create Company" }}
+            {{
+              isSubmitting
+                ? isEditing
+                  ? "Updating..."
+                  : "Creating..."
+                : isEditing
+                ? "Update Company"
+                : "Create Company"
+            }}
           </button>
         </div>
       </form>

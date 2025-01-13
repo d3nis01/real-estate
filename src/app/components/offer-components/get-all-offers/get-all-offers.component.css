@@ -17,29 +17,12 @@
   }
 }
 
-/* Navigation Bar Styling */
 .nav-bar {
   padding: 12px;
   display: flex;
   gap: 16px;
 }
 
-.getalloffers-button {
-  padding: 8px 12px;
-  font-size: 14px;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.getalloffers-button:hover {
-  background-color: #0056b3;
-}
-
-/* Offers Table Styling */
 .offer-table {
   padding: 1rem 0;
   max-width: 1200px;
@@ -92,65 +75,6 @@ tbody tr:hover {
   cursor: pointer;
 }
 
-/* Details Button Styling */
-.details-button {
-  padding: 8px 12px;
-  font-size: 14px;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  @media (max-width: 690px) {
-    padding: 6px 8px;
-    font-size: 12px;
-  }
-}
-
-.details-button:hover {
-  background-color: #0056b3;
-}
-
-/* Pagination Styling */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  padding: 10px 0;
-  font-size: 16px;
-}
-
-.pagination-button {
-  padding: 10px 15px;
-  font-size: 14px;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
-  width: 100px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.pagination-button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.pagination-button:hover:not(:disabled) {
-  background-color: #0056b3;
-  transform: translateY(-2px);
-}
-
-.pagination span {
-  font-weight: bold;
-  color: #333;
-}
-
 @media (max-width: 690px) {
   th:nth-child(2) {
     display: none;
@@ -185,15 +109,15 @@ tbody tr:hover {
 
 .mat-cell,
 .mat-header-cell {
-  white-space: nowrap; /* Prevent text from wrapping */
-  overflow: hidden; /* Hide overflow content */
-  text-overflow: ellipsis; /* Add ellipsis if text is truncated */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mat-cell {
   max-width: 500px;
   @media (max-width: 690px) {
-    max-width: 200px; /* Set a maximum width for cells */
+    max-width: 200px;
   }
 }
 
@@ -201,5 +125,5 @@ tbody tr:hover {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 90px; /* Optional: Set a specific max width */
+  max-width: 90px;
 }
