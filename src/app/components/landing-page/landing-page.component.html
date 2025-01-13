@@ -10,7 +10,7 @@
       <!-- title and description -->
       <div class="flex flex-col md:pr-8 gap-2">
         <div class="text-[30px] xs:text-[40px] text-primary leading-9">
-          The new way to build your new home
+          The best way to build your new home
         </div>
         <div class="text-md text-foreground">
           Build your dream place to live in with more than 10k+ properties built
@@ -71,5 +71,47 @@
   </div>
 
   <!-- second part -->
-  <div></div>
+  <div class="second-container">
+    <div class="second-left-wrapper">
+      <div class="second-left">
+        <div class="second-text-container">
+          <div class="second-title">
+            Build you dream property easily with Estatery
+          </div>
+          <div class="second-description">
+            An excellent platform to buy, sell, build properties with zero
+            commissions.
+          </div>
+        </div>
+        <div class="second-toolbar">
+          <div class="second-toolbar-text-container">
+            <div class="second-toolbar-title">Location</div>
+            <div class="second-toolbar-description">Barcelona, Spain</div>
+          </div>
+          <div class="second-toolbar-separator"></div>
+          <div class="second-toolbar-text-container">
+            <div class="second-toolbar-title">Budget</div>
+            <div class="second-toolbar-description">$ 150,000.00</div>
+          </div>
+          <div class="second-toolbar-separator"></div>
+          <button
+            mat-flat-button
+            color="primary"
+            class="second-toolbar-button"
+            (click)="goToListings()"
+          >
+            Listings
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="second-right">
+      <div class="second-img-container">
+        <img
+          [src]="'assets/images/landing-page/built-house.png'"
+          class="second-img"
+        />
+      </div>
+    </div>
+  </div>
 </div>
