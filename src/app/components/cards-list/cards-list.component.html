@@ -6,7 +6,9 @@
         Some of our picked properties near your location.
       </div>
     </div>
-    <button mat-flat-button (click)="goToCreateListing()">New listing</button>
+    <button mat-flat-button *ngIf="isLoggedIn" (click)="goToCreateListing()">
+      New listing
+    </button>
   </div>
 
   <div class="card-grid">

@@ -6,12 +6,12 @@
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Username</mat-label>
         <input matInput formControlName="username" />
-        <mat-error *ngIf="username?.invalid && username?.touched">
-          <span *ngIf="username?.errors?.['required']"
-            >Username is required.</span
-          >
+        <mat-error *ngIf="username?.touched && username?.invalid">
+          <span *ngIf="username?.errors?.['required']">
+            Username is required.
+          </span>
           <span *ngIf="username?.errors?.['minlength']">
-            Username must be at least 3 characters long.
+            Username must be at least 3 characters.
           </span>
         </mat-error>
       </mat-form-field>
@@ -19,8 +19,8 @@
       <!-- Email -->
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" />
-        <mat-error *ngIf="email?.invalid && email?.touched">
+        <input matInput type="email" formControlName="email" />
+        <mat-error *ngIf="email?.touched && email?.invalid">
           <span *ngIf="email?.errors?.['required']">Email is required.</span>
           <span *ngIf="email?.errors?.['email']"
             >Enter a valid email address.</span
@@ -28,20 +28,25 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- City -->
+      <!-- Phone Number -->
       <mat-form-field appearance="fill" class="form-field">
-        <mat-label>City</mat-label>
-        <input matInput formControlName="city" />
-        <mat-error *ngIf="city?.invalid && city?.touched">
-          <span *ngIf="city?.errors?.['required']">City is required.</span>
+        <mat-label>Phone Number</mat-label>
+        <input matInput formControlName="phoneNumber" />
+        <mat-error *ngIf="phoneNumber?.touched && phoneNumber?.invalid">
+          <span *ngIf="phoneNumber?.errors?.['required']">
+            Phone number is required.
+          </span>
+          <span *ngIf="phoneNumber?.errors?.['pattern']">
+            Phone number must contain 5-20 digits.
+          </span>
         </mat-error>
       </mat-form-field>
 
       <!-- Password -->
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Password</mat-label>
-        <input matInput formControlName="password" type="password" />
-        <mat-error *ngIf="password?.invalid && password?.touched">
+        <input matInput type="password" formControlName="password" />
+        <mat-error *ngIf="password?.touched && password?.invalid">
           <span *ngIf="password?.errors?.['required']"
             >Password is required.</span
           >
@@ -49,7 +54,7 @@
             Password must be at least 6 characters long.
           </span>
           <span *ngIf="password?.errors?.['strongPassword']">
-            Password must contain an uppercase letter, number, and special
+            Password must include an uppercase letter, a digit, and a special
             character.
           </span>
         </mat-error>
@@ -58,8 +63,10 @@
       <!-- Confirm Password -->
       <mat-form-field appearance="fill" class="form-field">
         <mat-label>Confirm Password</mat-label>
-        <input matInput formControlName="confirmPassword" type="password" />
-        <mat-error *ngIf="confirmPassword?.invalid && confirmPassword?.touched">
+        <input matInput type="password" formControlName="confirmPassword" />
+        <mat-error
+          *ngIf="confirmPassword?.touched && confirmPassword?.invalid || registerForm.errors?.['passwordMismatch']"
+        >
           <span *ngIf="confirmPassword?.errors?.['required']">
             Confirm password is required.
           </span>
@@ -69,13 +76,14 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- Link to Login -->
-      <p class="text-end font-[14px]">
-        Already have an account?
-        <a mat-button color="accent" class="font-sm" (click)="goToLogin()"
-          >Login here</a
-        >
-      </p>
+      <!-- City -->
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city" />
+        <mat-error *ngIf="city?.touched && city?.invalid">
+          <span *ngIf="city?.errors?.['required']">City is required.</span>
+        </mat-error>
+      </mat-form-field>
 
       <!-- Submit Button -->
       <div class="button-container">

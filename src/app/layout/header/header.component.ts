@@ -89,7 +89,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/']);
   }
   goToLandingPage() {
-    this.router.navigate(['/landing-page']);
+    this.router.navigate(['/']);
   }
   goToCards() {
     this.router.navigate(['/card-list']);

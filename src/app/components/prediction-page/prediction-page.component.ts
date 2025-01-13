@@ -60,9 +60,11 @@ export class PredictionPageComponent {
 
     this.predictionService.predict(requestData).subscribe({
       next: (result) => {
-        this.predictionResult = `Predicted growth for ${
+        this.predictionResult = `The predicted real estate market growth for ${
           this.country
-        } is ${result.toFixed(2)}% compared to the previous year.`;
+        } is estimated to be ${result.toFixed(
+          2
+        )}% compared to the previous year.`;
       },
       error: (err) => {
         this.openSnackBar(

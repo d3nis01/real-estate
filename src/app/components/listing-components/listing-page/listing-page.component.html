@@ -165,7 +165,12 @@
     >
       Send an offer
     </button>
-    <button mat-flat-button (click)="goToAllOffers()" class="send-offer-btn">
+    <button
+      *ngIf="userHasCompany || ownsListing"
+      mat-flat-button
+      (click)="goToAllOffers()"
+      class="send-offer-btn"
+    >
       View all offers
     </button>
   </div>

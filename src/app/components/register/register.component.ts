@@ -6,50 +6,50 @@ import {
   AbstractControl,
   ValidationErrors,
   ValidatorFn,
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { AuthService } from '../../services/auth-service/auth.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../services/auth-service/auth.service';
+import { MatCardModule } from '@angular/material/card';
+
 @Component({
   selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css'],
   standalone: true,
   imports: [
+    MatFormFieldModule,
     ReactiveFormsModule,
     CommonModule,
-    MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatCardModule,
     MatSnackBarModule,
   ],
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
   registerForm: FormGroup;
   isSubmitting = false;
-  username: any;
-  email: any;
-  city: any;
-  password: any;
-  confirmPassword: any;
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private authService: AuthService
   ) {
     this.registerForm = this.fb.group(
       {
         username: ['', [Validators.required, Validators.minLength(3)]],
         email: ['', [Validators.required, Validators.email]],
+        phoneNumber: [
+          '',
+          [Validators.required, Validators.pattern(/^\d{5,20}$/)],
+        ],
         password: [
           '',
           [
@@ -59,7 +59,7 @@ export class RegisterComponent {
           ],
         ],
         confirmPassword: ['', [Validators.required]],
-        city: ['', [Validators.required]],
+        city: ['', Validators.required],
       },
       { validators: this.passwordsMatchValidator }
     );
@@ -68,28 +68,47 @@ export class RegisterComponent {
   private strongPasswordValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const password = control.value?.trim();
-
-      if (!password) {
-        return null;
-      }
+      if (!password) return null;
 
       const strongPasswordPattern =
         /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/;
-
       return strongPasswordPattern.test(password)
         ? null
         : { strongPassword: true };
     };
   }
 
-  private passwordsMatchValidator(
+  private passwordsMatchValidator: ValidatorFn = (
     group: AbstractControl
-  ): ValidationErrors | null {
+  ): ValidationErrors | null => {
     const password = group.get('password')?.value;
     const confirmPassword = group.get('confirmPassword')?.value;
     return password === confirmPassword ? null : { passwordMismatch: true };
+  };
+
+  get username() {
+    return this.registerForm.get('username');
   }
 
+  get email() {
+    return this.registerForm.get('email');
+  }
+
+  get phoneNumber() {
+    return this.registerForm.get('phoneNumber');
+  }
+
+  get password() {
+    return this.registerForm.get('password');
+  }
+
+  get confirmPassword() {
+    return this.registerForm.get('confirmPassword');
+  }
+
+  get city() {
+    return this.registerForm.get('city');
+  }
   onSubmit(): void {
     if (this.registerForm.invalid) {
       this.snackBar.open('Please fix the errors in the form.', 'Close', {
@@ -112,9 +131,14 @@ export class RegisterComponent {
         });
         this.router.navigate(['/login']);
       },
-      error: () => {
+      error: (errorResponse) => {
         this.isSubmitting = false;
-        this.snackBar.open('Registration failed. Please try again.', 'Close', {
+
+        const errorMessage =
+          errorResponse.error?.validationErrors?.join(', ') ||
+          errorResponse.error?.title ||
+          'Registration failed. Please try again.';
+        this.snackBar.open(errorMessage, 'Close', {
           duration: 3000,
           panelClass: 'error-snackbar',
         });

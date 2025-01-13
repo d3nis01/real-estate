@@ -1,6 +1,15 @@
 <div class="prediction-page">
   <div class="prediction-container">
-    <div class="prediction-title">Prediction Form</div>
+    <div class="flex flex-col gap-3">
+      <div class="prediction-title">Prediction Form</div>
+      <div class="text-foreground text-sm">
+        This form is designed to predict the growth of the real estate market in
+        a specific country, expressed as a percentage. Simply enter the desired
+        country and a specific date, and the system will analyze this data to
+        provide an estimate of the anticipated market growth for the selected
+        location and time.
+      </div>
+    </div>
 
     <form (ngSubmit)="onSubmit()" class="space-y-4 w-full">
       <!-- Country Input -->
@@ -39,7 +48,7 @@
 
       <div class="flex justify-between items-center mt-4">
         <button
-          mat-raised-button
+          mat-flat-button
           color="primary"
           type="submit"
           [disabled]="!country || !date"
@@ -60,10 +69,11 @@
 
   <!-- Prediction Result -->
   <div *ngIf="predictionResult" class="prediction-container">
-    <div class="prediction-title">Prediction result</div>
-    <div class="flex flex-col items-left">
-      <p class="text-lg font-semibold mb-2">Predicted Growth</p>
-      <p class="text-md font-bold text-foreground">{{ predictionResult }}</p>
+    <div class="flex flex-col gap-3">
+      <div class="prediction-title">Prediction result</div>
+      <div class="text-foreground text-sm">
+        {{ predictionResult }}
+      </div>
     </div>
   </div>
 </div>

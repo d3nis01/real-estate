@@ -11,8 +11,7 @@
     </button>
     <mat-menu #mobileMenu="matMenu">
       <!-- Include dynamic menu options -->
-      <button mat-menu-item (click)="goToLandingPage()">Landing Page</button>
-      <button mat-menu-item (click)="goToCards()">Cards</button>
+      <button mat-menu-item (click)="goToLandingPage()">Home</button>
       <button mat-menu-item (click)="goToPredictPrice()">Predict Price</button>
       <button mat-menu-item [matMenuTriggerFor]="companiesMenu">
         Companies
@@ -21,7 +20,7 @@
     </mat-menu>
 
     <!-- Logo (Visible always) -->
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2" (click)="goToLandingPage()">
       <div class="header-logo">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -61,30 +60,35 @@
   <!-- Rest of the Header -->
   <div class="header-center lg:flex hidden">
     <!-- Full menu options (Visible only when screen width is >= 992px) -->
-
     <div class="header-center-element">
-      <button mat-button (click)="goToLandingPage()">Landing Page</button>
+      <button mat-button color="primary" (click)="goToLandingPage()">
+        Home
+      </button>
     </div>
     <div class="header-center-element">
-      <button mat-button (click)="goToPredictPrice()">Predict Price</button>
+      <button mat-button color="primary" (click)="goToPredictPrice()">
+        Predict Price
+      </button>
     </div>
     <button mat-button [matMenuTriggerFor]="companiesMenu">Companies</button>
     <mat-menu #companiesMenu="matMenu">
-      <button mat-menu-item (click)="goToCreateCompany()">Your company</button>
       <button mat-menu-item (click)="goToGetAllCompanies()">
         View all companies
+      </button>
+      <button mat-menu-item (click)="goToCreateCompany()" *ngIf="isLoggedIn">
+        Your company
       </button>
     </mat-menu>
 
     <button mat-button [matMenuTriggerFor]="listingsMenu">Listings</button>
     <mat-menu #listingsMenu="matMenu">
-      <button mat-menu-item (click)="goToCreateListing()">
-        Create a new listing
-      </button>
       <button mat-menu-item (click)="goToGetAllListings()">
         View all listings
       </button>
-      <button mat-menu-item (click)="goToUserListings()">
+      <button mat-menu-item (click)="goToCreateListing()" *ngIf="isLoggedIn">
+        Create a new listing
+      </button>
+      <button mat-menu-item (click)="goToUserListings()" *ngIf="isLoggedIn">
         View your listings
       </button>
     </mat-menu>
@@ -96,17 +100,24 @@
     <ng-container *ngIf="isLoggedIn; else guestButtons">
       <div class="header-user-info">
         <span>Welcome, {{ username }}</span>
-        <button class="logout-button" (click)="logout()" aria-label="Logout">
+        <button
+          mat-flat-button
+          color="warn"
+          (click)="logout()"
+          aria-label="Logout"
+        >
           Logout
         </button>
       </div>
     </ng-container>
     <ng-template #guestButtons>
       <div class="header-buttons">
-        <button class="register-button" (click)="goToRegister()">
+        <button mat-raised-button color="primary" (click)="goToRegister()">
           Register
         </button>
-        <button class="login-button" (click)="goToLogin()">Login</button>
+        <button mat-flat-button color="primary" (click)="goToLogin()">
+          Login
+        </button>
       </div>
     </ng-template>
   </div>

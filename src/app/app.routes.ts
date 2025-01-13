@@ -19,7 +19,7 @@ import { GetAllOffersComponent } from './components/offer-components/get-all-off
 import { GetUserListingsComponent } from './components/listing-components/get-user-listings/get-user-listings.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/landing-page', pathMatch: 'full' },
+  { path: '', component: LandingPageComponent, pathMatch: 'full' }, // Load LandingPageComponent at root
   {
     path: 'get-all-users',
     component: GetAllUsersComponent,

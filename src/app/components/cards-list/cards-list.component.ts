@@ -5,6 +5,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { ListingService } from '../../services/listing-service/listing.service';
+import { AuthService } from '../../services/auth-service/auth.service';
 import { Listing } from '../../models/listing';
 
 @Component({
@@ -19,13 +20,33 @@ export class CardsListComponent implements OnInit {
   totalItems = 0; // Total number of items from the backend
   pageSize = 10; // Number of items per page
   currentPage = 0; // Current page index
+  isLoggedIn = false; // Track user's login status
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private listingService: ListingService, private router: Router) {}
+  constructor(
+    private listingService: ListingService,
+    private authService: AuthService, // Inject AuthService
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    this.checkLoginStatus();
     this.fetchListings();
+  }
+
+  /**
+   * Check user's login status
+   */
+  private checkLoginStatus(): void {
+    this.authService.getCurrentUser().subscribe({
+      next: (user) => {
+        this.isLoggedIn = !!user; // Set true if user exists
+      },
+      error: () => {
+        this.isLoggedIn = false;
+      },
+    });
   }
 
   /**
