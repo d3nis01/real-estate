@@ -60,10 +60,12 @@ export class LoginComponent {
         this.showSnackbar('Login successful!', 'success');
         this.router.navigate(['/']);
       },
-      error: () => {
+      error: (err) => {
         this.isSubmitting = false;
+        console.error(err);
         this.showSnackbar('Invalid login credentials.', 'error');
       },
+      
     });
   }
 

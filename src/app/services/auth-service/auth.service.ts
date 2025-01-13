@@ -7,6 +7,7 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthService {
   private baseUrl = environment.apiUrl + '/Auth';
+  private logoutUrl = environment.apiUrl + '/Users/logout';
   private currentUserUrl = environment.apiUrl + '/Users/me';
   private currentUserSubject = new BehaviorSubject<any>(null);
 
@@ -27,6 +28,7 @@ export class AuthService {
     return this.http
       .post(`${this.baseUrl}/login`, credentials, {
         withCredentials: true,
+        responseType: 'text',
       })
       .pipe(
         tap(() => {
@@ -62,10 +64,11 @@ export class AuthService {
 
   logout(): Observable<void> {
     return this.http
-      .post<void>(`${this.baseUrl}/logout`, {}, { withCredentials: true })
+      .post<void>(`${this.logoutUrl}`, {}, { withCredentials: true })
       .pipe(
         tap(() => {
           this.currentUserSubject.next(null);
+          // window.location.reload();
         })
       );
   }
